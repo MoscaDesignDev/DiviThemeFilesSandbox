@@ -1,0 +1,72 @@
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N4TLPZ4Q"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<!--Start of Tawk.to Script-->
+<script defer type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+Tawk_API.onPrechatSubmit = function(data) {
+var fields = [
+	{
+		name: 'name',
+		value: data.name
+	},
+	{
+		name: 'email',
+		value: data.email
+	},
+	{
+		name: 'message',
+		value: data.questions?.find(q => q.label === 'Message').answer
+	}
+		];
+		mcfxCaptureCustomFormData(fields, 'preform-chat');
+	};
+		Tawk_API.onOfflineSubmit = function(data){
+		var fields = [
+		{
+		name: 'name',
+		value: data.name
+	},
+	{
+		name: 'email',
+		value: data.email
+	},
+	{
+		name: 'message',
+		value: data.questions?.find(q => q.label === 'Message').answer
+	}
+		];
+		mcfxCaptureCustomFormData(fields, 'form-chat');
+	};
+		Tawk_API.onChatStarted = function(){
+		mcfx('send', {
+		type: 'event',
+		category: 'chat',
+		action: 'started',
+		label: window.location.href,
+		value: 0
+	});
+};
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/605c8819067c2605c0bc29d7/1f1kn78m2';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
+
+
+
+
+
+
+
+
+

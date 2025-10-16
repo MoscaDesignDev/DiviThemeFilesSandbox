@@ -1,0 +1,370 @@
+.wpf_slider.ui-slider .ui-widget-header {
+  background: #0251b8!important;
+	height: 7px!important;
+}
+
+
+
+.woocommerce div.product div.images .woocommerce-product-gallery__trigger {
+    top: 1.5em!important;
+}
+
+
+@media (max-width: 1024px){
+ .woo_amc_open_image svg, .woo_amc_open_count{
+    display: none;
+}
+p.woocommerce-store-notice.demo_store{
+display: none!important;
+}
+}
+
+
+@media (min-width: 768px) and (max-width: 1024px) {  
+ .woo_amc_open_image svg, .woo_amc_open_count{
+    display: none;
+}
+p.woocommerce-store-notice.demo_store{
+display: none!important;
+}
+}
+
+
+/* STORE NOTICE at top */
+p.woocommerce-store-notice.demo_store {
+    position: sticky!important;
+    top: 0!important;
+    order: -1!important;
+}
+body {
+    position: sticky!important;
+    display: flex!important;
+    flex-direction: column!important;
+}
+.woocommerce-store-notice, p.demo_store {
+	background-color: #ffffff!important;
+	font-size: 18px!important;
+	padding-bottom: 10px!important;
+}
+.woocommerce-store-notice__dismiss-link {
+display: none!important;
+}
+/* END STORE NOTICE at top */
+
+/* Hide reCaptcha */
+.grecaptcha-badge {
+opacity: 0;
+}
+
+/* Lighting Page: Red arrow in images*/
+.et-pb-slider-arrows {
+   Color: #f00;
+	 font-Size: 90px!important;
+}
+.et-pb-arrow-next, .et-pb-arrow-prev {
+    font-size: 70px;
+}
+
+.woocommerce ul.products {
+    padding-top: 35px!important;
+}
+
+/* Deletes the botton scroll bar for website*/
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* MINILIGHTS PAGE Plugs and Wire Color Alligns each horizontal*/.plugs {
+  float: left;
+  width: 25%;
+  padding: 10px;}
+
+.p2:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.minilights {
+  float: left;
+  width: 25%;
+  padding: 10px;}
+
+.ml2:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* END OF MINILIGHTS PAGE: Plugs and Wire Color Alligns each horizontal */
+
+/* Font size on all products under image on category pages*/
+.woocommerce ul.products li.product .woocommerce-loop-product__title, .woocommerce ul.products li.product h3 {
+	font-size: 18px;
+}
+
+/* MEGA MENU font size*/ 
+#mega-menu-wrap-primary-menu #mega-menu-primary-menu > li.mega-menu-item > a.mega-menu-link {
+    font-size: 18px!important;
+}
+
+/* Filter on Silhouette Price Ranges edits*/ 
+.wpf_items_wrapper .wpf_item ul li {
+	display: block!important;
+}
+
+.woocommerce form .form-row input.input-text {
+    background-color: #e0e0e0!important;
+}
+
+/* Pagination scroll through pages botton of Product images */
+.woocommerce nav.woocommerce-pagination {
+    font-size: 22px;
+}
+/* END Pagination scroll 8*/
+
+/* Shopping Cart ICON in-line with text **/
+.et_pb_menu--style-left_aligned .et_pb_menu_inner_container, .et_pb_menu--style-left_aligned .et_pb_row {
+    width: 275px!important;
+}
+/* END -- Shopping Cart ICON in-line with text **/
+
+/* Make product images display at 1:1 by default when in catalog view */
+ .md-shop .et_shop_image {
+    width: 100% !important;
+   	height: 100% !important;
+	 	background-size: cover;
+	  background-color: #ffffff;
+  }
+  
+  .md-shop .et_shop_image div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+  
+  .md-shop .et_shop_image div img {
+    width: 100% !important; 
+    height: 100% !important;
+    object-fit: contain;
+  }
+/*--------------------*/
+
+/** Mobile menu select hamburger button **/
+@media only screen and (max-width: 1024px) {
+#mega-menu-wrap-max_mega_menu_1 .mega-menu-toggle {
+    margin-right: -188px;
+    margin-top: -14px;
+	}}
+/** END -- mobile menu select hamburger button **/
+
+/** 2 Columns Mobile **/
+@media all and (max-width: 767px) {
+    .two-col-mob .et_pb_column {
+        width:47.25% !important;
+    }
+    
+.two-col-mob .et_pb_column:nth-last-child(-n+2) {
+        margin-bottom:0;
+    }
+.two-col-mob .et_pb_column:not(:nth-child(2n)) {
+            margin-right:5.5% !important;
+    }
+}
+/** END -- 2 Columns Mobile **/
+
+/**ORNAMENTS Page Filter botton selection**/
+.wpf_item.wpf_item_instock {
+    font-size: 16px;
+    color: red;
+}
+
+
+input.text, input.title, input[type=text] {
+    margin: 0;
+    width: 100%;
+	  text-align: left !important;
+    height: 35px;
+    padding: 8px;
+    border: 1px solid #462500;
+    border-radius: 3px;
+
+}
+
+/**------------ SALESFORCE FORMS CODING -----------**/
+#responsive-form{
+	max-width:1440px;
+  width:100%;
+}
+.form-row{
+	width: 100%;
+}
+.column-half, .column-full{
+	float: left;
+	position: relative;
+	padding: 5px;
+	width:100%;
+	-webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box
+}
+
+.column-eight{
+ float: left;
+ position: relative;
+ padding: 0.18rem;
+ width:12.5%;
+ -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+}
+.column-four{
+ float: left;
+ position: relative;
+ padding: 0.28rem;
+ width:25%;
+ -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+}
+
+.column-three{
+ float: left;
+ position: relative;
+ padding: 0.21rem;
+ width:33%;
+ -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+}
+
+.clearfix:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.wpcf7-form .wpcf7-mail-sent-ok {
+    margin-top: 25px;
+}
+@media only screen and (min-width: 48em) { 
+	.column-half{
+		width: 50%;
+	}
+}
+
+textarea {
+	width: 100%;
+    height: 70px;
+	padding: 8px;
+	border: 1px solid #462500!important;
+	border-radius: 3px;
+	-webkit-box-sizing: border-box;
+	 -moz-box-sizing: border-box;
+	      box-sizing: border-box
+}
+input[type="text"] {
+	background: #fff;
+	border: 1px solid #462500!important;
+}
+
+input[type="date"] {
+	height: 35px!important;
+	padding-left: 10px;
+	border-radius: 4px;
+}
+
+input[type="checkbox"] {
+  margin-left: 30px;
+  margin-right: 10px;
+	float: left;
+	font-size: 22px;
+}
+
+
+input[type="email"] {
+	width: 100%;
+	text-align: left !important;
+	height: 35px;
+	border: 1px solid #462500;
+	border-radius: 3px;
+	-webkit-box-sizing: border-box;
+	 -moz-box-sizing: border-box;
+	      box-sizing: border-box
+}
+
+
+select {
+    width: 100%;
+	  text-align: left !important;
+    height: 35px;
+    padding: 8px;
+    border: 1px solid #462500;
+    border-radius: 3px;
+}  
+
+select-arrow {
+    background-color: #ffffff;
+    border: 1px solid #462500!important;
+    height: 34px!important;
+    padding: 8px!important;
+    border-radius: 4px!important;
+    width: 28px!important;
+}   
+button  {
+	float: left!important;
+	border-radius: 4px!important;
+	background: #CA0002!important;
+	color: #fff!important;
+	text-transform: uppercase!important;
+	border: none!important;
+	padding: 8px 20px!important;
+	cursor: pointer!important;
+}
+input[type="submit"]  {
+	float: left!important;
+	border-radius: 4px!important;
+	background: #CA0002!important;
+	color: #fff!important;
+	text-transform: uppercase!important;
+	border: none!important;
+	padding: 8px 20px!important;
+	cursor: pointer!important;
+}
+submit:hover{
+	background: #ff0000;
+}
+not-valid-tip {
+	text-shadow: none;
+	font-size: 12px;
+	color: #fff;
+	background: #f1f1f1!important;
+	padding: 5px;
+	color: #ff0095!important;
+    font-size: 1em;
+    font-family: arial;
+    font-weight: normal;
+}
+validation-errors { 
+	text-shadow: none;
+	border: transparent;
+	background: #f9cd00;
+	padding: 5px;
+	color: #9C6533;
+	text-align: center;
+	margin: 0;
+	font-size: 12px;
+}
+mail-sent-ok {
+	text-align: center;
+	text-shadow: none;
+	padding: 5px;
+	font-size: 12px;
+	background: #59a80f;
+	border-color: #59a80f;
+	color: #fff;
+	margin: 0;
+}
+
+/** END SALESFORCE CODING FORMS  **/
