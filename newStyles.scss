@@ -3,29 +3,34 @@
 
 .et_pb_section_video_bg {
     .mejs-mediaelement {
-        top: -20%;
-    }
-}
-.et_pb_slide_content {
-    button {
-        &#unmute-video {
-            background: transparent !important;
-            border: 1px solid #FFF !important;
-            border-radius: 50% !important;
-            padding: 12px 10px !important;
-            i {
-                color: #FFF;
-                display: flex;
-                &.fa-volume-xmark {
-                    display: flex;
-                }
-                &.fa-volume-high {
-                    display: none;
-                }
-            }
+        top: -7%;
+        @media (max-width: 767px) {
+            top: 0;
         }
     }
 }
+
+// Implement the below when we want to add audio to the banner video
+// .et_pb_slide_content {
+//     button {
+//         &#unmute-video {
+//             background: transparent !important;
+//             border: 1px solid #FFF !important;
+//             border-radius: 50% !important;
+//             padding: 12px 10px !important;
+//             i {
+//                 color: #FFF;
+//                 display: flex;
+//                 &.fa-volume-xmark {
+//                     display: flex;
+//                 }
+//                 &.fa-volume-high {
+//                     display: none;
+//                 }
+//             }
+//         }
+//     }
+// }
 
 // Header Snow
 
@@ -48,3 +53,52 @@
         }
     }
 }
+
+// Rollover Buttons - Using on Ornaments LP now, but will be a global
+.text__arrow__btn {
+  margin-bottom: 10px !important;
+  a {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: .75em 20px;
+    border-radius: 4px;
+    border: 1px solid rgb(6, 46, 99, .49);
+    background-color: rgb(2, 81, 184, .06);
+    color: rgb(6, 46, 99, .8);
+    box-shadow: 0px 7px 16px -10px rgba(0, 0, 0, 0);
+    transition: 0.2s;
+    &::after {
+      position: absolute;
+      content: "";
+      background: transparent url('https://dev-moscadesign.mystagingwebsite.com/wp-content/uploads/2025/11/arrow-right.png') center no-repeat;
+      background-size: auto 100%;
+      filter: invert(30%) sepia(50%) saturate(533%) hue-rotate(174deg) brightness(94%) contrast(90%);
+      width: 10px;
+      height: 13px;
+      right: 9px;
+      top: 50%;
+      opacity: .8;
+      transform: translate(0, -50%);
+      transition: 0.2s;
+    }
+    &:hover {
+      border: 1px solid rgb(6, 46, 99, .35);
+      background-color: rgb(2, 81, 184, .03);
+      color: rgb(6, 46, 99, 1);
+      box-shadow: 0px 7px 16px -10px rgba(0, 0, 0, 0.26);
+      transition: .2s;
+      &::after {
+        opacity: .5;
+        transition: 0.2s;
+      }
+    }
+  }
+}
+
+
+

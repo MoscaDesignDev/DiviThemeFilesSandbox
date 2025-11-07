@@ -1,22 +1,10 @@
 .et_pb_section_video_bg .mejs-mediaelement {
-  top: -20%;
+  top: -7%;
 }
-
-.et_pb_slide_content button#unmute-video {
-  background: transparent !important;
-  border: 1px solid #FFF !important;
-  border-radius: 50% !important;
-  padding: 12px 10px !important;
-}
-.et_pb_slide_content button#unmute-video i {
-  color: #FFF;
-  display: flex;
-}
-.et_pb_slide_content button#unmute-video i.fa-volume-xmark {
-  display: flex;
-}
-.et_pb_slide_content button#unmute-video i.fa-volume-high {
-  display: none;
+@media (max-width: 767px) {
+  .et_pb_section_video_bg .mejs-mediaelement {
+    top: 0;
+  }
 }
 
 .et_pb_section_1_tb_header.et_pb_section::before {
@@ -33,6 +21,51 @@
 .et_pb_section_1_tb_header.et_pb_section .et_pb_row_3_tb_header,
 .et_pb_section_1_tb_header.et_pb_section .et_pb_row_4_tb_header {
   background-color: transparent;
+}
+
+.text__arrow__btn {
+  margin-bottom: 10px !important;
+}
+.text__arrow__btn a {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.75em 20px;
+  border-radius: 4px;
+  border: 1px solid rgba(6, 46, 99, 0.49);
+  background-color: rgba(2, 81, 184, 0.06);
+  color: rgba(6, 46, 99, 0.8);
+  box-shadow: 0px 7px 16px -10px rgba(0, 0, 0, 0);
+  transition: 0.2s;
+}
+.text__arrow__btn a::after {
+  position: absolute;
+  content: "";
+  background: transparent url("https://dev-moscadesign.mystagingwebsite.com/wp-content/uploads/2025/11/arrow-right.png") center no-repeat;
+  background-size: auto 100%;
+  filter: invert(30%) sepia(50%) saturate(533%) hue-rotate(174deg) brightness(94%) contrast(90%);
+  width: 10px;
+  height: 13px;
+  right: 9px;
+  top: 50%;
+  opacity: 0.8;
+  transform: translate(0, -50%);
+  transition: 0.2s;
+}
+.text__arrow__btn a:hover {
+  border: 1px solid rgba(6, 46, 99, 0.35);
+  background-color: rgba(2, 81, 184, 0.03);
+  color: rgb(6, 46, 99);
+  box-shadow: 0px 7px 16px -10px rgba(0, 0, 0, 0.26);
+  transition: 0.2s;
+}
+.text__arrow__btn a:hover::after {
+  opacity: 0.5;
+  transition: 0.2s;
 }
 
 /*# sourceMappingURL=newStyles.css.map */
