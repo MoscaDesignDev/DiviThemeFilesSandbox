@@ -1,0 +1,141 @@
+
+
+<!-- Desktop Top Products Div  -->
+<hr>
+
+<div class="custom-result-count"></div>
+
+<script>
+jQuery(document).ready(function($) {
+  function updateCount() {
+      setTimeout(function() {
+          // Count only in the FIRST products container (desktop)
+          var count = $('ul.products:first li.product:visible').length;
+          
+          $('.custom-result-count').html('<p>Showing ' + count + ' results</p>');
+          console.log('Desktop count:', count);
+      }, 500);
+  }
+  
+  $(document).on('berocket_ajax_products_loaded berocket_ajax_filtering_end', updateCount);
+  $(document).ajaxComplete(updateCount);
+  updateCount();
+
+  // Filter and Clear Buttons styles
+  function updateFilterButtonStates() {
+    var hasActiveFilters = $('.wpfCheckbox input[type="checkbox"]:checked').length > 0;
+    
+    var $filterButton = $('.wpfFilterButton, button[type="submit"]').filter(function() {
+        return $(this).text().toLowerCase().includes('filter');
+    });
+    
+    var $clearButton = $('.wpfClearButton');
+    
+    if (hasActiveFilters) {
+        // Filters are active
+        $filterButton.addClass('has-active-filters').removeClass('no-active-filters');
+        $clearButton.addClass('has-active-filters').removeClass('no-active-filters');
+    } else {
+        // No filters active
+        $filterButton.addClass('no-active-filters').removeClass('has-active-filters');
+        $clearButton.addClass('no-active-filters').removeClass('has-active-filters');
+    }
+    
+    console.log('Filter buttons updated. Active filters:', hasActiveFilters);
+  }
+
+  // Update when Filter or Clear buttons are clicked
+  $(document).on('click', '.wpfFilterButton, .wpfClearButton, button[type="submit"]', function() {
+      setTimeout(updateFilterButtonStates, 500);
+  });
+
+  // Update after AJAX completes
+  $(document).on('berocket_ajax_products_loaded berocket_ajax_filtering_end', function() {
+      setTimeout(updateFilterButtonStates, 300);
+  });
+
+  // Update on AJAX completion
+  $(document).ajaxComplete(function() {
+      setTimeout(updateFilterButtonStates, 500);
+  });
+
+  // Initial state
+  updateFilterButtonStates();
+
+});
+</script>
+
+[products category="specialty-colors" limit="-1" per_page="-1" columns="5"]
+
+
+
+
+
+<!-- Mobile Bottom Products Div *** Note that these are slightly different -->
+<div class="custom-result-count-mobile"></div>
+
+<script>
+jQuery(document).ready(function($) {
+    function updateCountMobile() {
+        setTimeout(function() {
+            // Count only in the LAST/SECOND products container (mobile)
+            var count = $('ul.products:last li.product:visible').length;
+            
+            $('.custom-result-count-mobile').html('<p>Showing ' + count + ' results</p>');
+            console.log('Mobile count:', count);
+        }, 500);
+    }
+    
+    $(document).on('berocket_ajax_products_loaded berocket_ajax_filtering_end', updateCountMobile);
+    $(document).ajaxComplete(updateCountMobile);
+    updateCountMobile();
+
+  // Filter and Clear Buttons styles
+  function updateFilterButtonStates() {
+    var hasActiveFilters = $('.wpfCheckbox input[type="checkbox"]:checked').length > 0;
+    
+    var $filterButton = $('.wpfFilterButton, button[type="submit"]').filter(function() {
+        return $(this).text().toLowerCase().includes('filter');
+    });
+    
+    var $clearButton = $('.wpfClearButton');
+    
+    if (hasActiveFilters) {
+        // Filters are active
+        $filterButton.addClass('has-active-filters').removeClass('no-active-filters');
+        $clearButton.addClass('has-active-filters').removeClass('no-active-filters');
+    } else {
+        // No filters active
+        $filterButton.addClass('no-active-filters').removeClass('has-active-filters');
+        $clearButton.addClass('no-active-filters').removeClass('has-active-filters');
+    }
+    
+    console.log('Filter buttons updated. Active filters:', hasActiveFilters);
+  }
+
+  // Update when Filter or Clear buttons are clicked
+  $(document).on('click', '.wpfFilterButton, .wpfClearButton, button[type="submit"]', function() {
+      setTimeout(updateFilterButtonStates, 500);
+  });
+
+  // Update after AJAX completes
+  $(document).on('berocket_ajax_products_loaded berocket_ajax_filtering_end', function() {
+      setTimeout(updateFilterButtonStates, 300);
+  });
+
+  // Update on AJAX completion
+  $(document).ajaxComplete(function() {
+      setTimeout(updateFilterButtonStates, 500);
+  });
+
+  // Initial state
+  updateFilterButtonStates();
+});
+</script>
+
+[products category="specialty-colors" limit="-1" per_page="-1" columns="4"]
+
+
+
+
+

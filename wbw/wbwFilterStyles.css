@@ -1,0 +1,76 @@
+.wpfMainWrapper .wpfFilterButtons.wpfFilterButtonsTop {
+  display: flex !important;
+  justify-content: space-between !important;
+}
+.wpfMainWrapper .wpfFilterButtons.wpfFilterButtonsTop .wpfButton.wpfFilterButton, .wpfMainWrapper .wpfFilterButtons.wpfFilterButtonsTop .wpfButton.wpfClearButton {
+  float: none !important;
+  transition: 0.2s !important;
+  width: auto !important;
+  flex: 1 !important;
+}
+.wpfMainWrapper .wpfFilterButtons.wpfFilterButtonsTop .wpfButton.wpfFilterButton:hover, .wpfMainWrapper .wpfFilterButtons.wpfFilterButtonsTop .wpfButton.wpfClearButton:hover {
+  background: #467bbf !important;
+}
+.wpfMainWrapper .wpfFilterButtons.wpfFilterButtonsTop .wpfButton.wpfFilterButton {
+  background: #0251b8 !important;
+}
+.wpfMainWrapper .wpfFilterButtons.wpfFilterButtonsTop .wpfButton.wpfClearButton {
+  background: #c91136 !important;
+}
+.wpfMainWrapper .wpfFilterButtons.wpfFilterButtonsTop .wpfButton.wpfClearButton.no-active-filters {
+  pointer-events: none;
+  background-color: #d2d2d2 !important;
+}
+.wpfMainWrapper .wpfFilterWrapper {
+  border-radius: 5px !important;
+  background-color: #e2e4e7 !important;
+  padding: 20px !important;
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterTitle {
+  color: #0251b8 !important;
+  padding: 0 3px !important;
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterContent ul {
+  padding: 0 !important;
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterContent ul li {
+  background-color: #f5f5f5 !important;
+  border-radius: 3px !important;
+  padding: 3px 6px !important;
+  transition: 0.2s !important;
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterContent ul li:hover {
+  background-color: #fff !important;
+  transition: 0.2s !important;
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterContent ul li input[type=checkbox] + label::before {
+  background: url("https://moscadesign.com/wp-content/uploads/2025/11/productFiltersButtonEmpty.png") !important;
+  background-size: 100% 100% !important;
+  border: none !important;
+  width: 18px !important;
+  height: 18px !important;
+  left: -2px !important;
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterContent ul li input[type=checkbox]:checked + label::before {
+  background: url("https://moscadesign.com/wp-content/uploads/2025/11/productFiltersButtonChecked.png") !important;
+  background-size: 100% 100% !important;
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterContent ul li:not(:last-child) {
+  margin-bottom: 3px !important;
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterContent ul li .wpfLiLabel .wpfCheckbox {
+  position: relative !important;
+  vertical-align: middle !important;
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterContent ul li .wpfLiLabel .wpfCheckbox label {
+  vertical-align: middle !important;
+  position: absolute !important;
+  left: 10px !important;
+  top: 50% !important;
+  transform: translate(0, -28%) !important;
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterContent ul li .wpfLiLabel .wpfDisplay {
+  margin-left: 26px !important;
+}
+
+/*# sourceMappingURL=wbwFilterStyles.css.map */

@@ -68,4 +68,35 @@
   transition: 0.2s;
 }
 
+#wpfOverlay #wpfOverlayText {
+  position: relative; /* Changed from absolute */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0;
+  color: transparent;
+}
+#wpfOverlay #wpfOverlayText::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px; /* Adjust to your image size */
+  height: 100px; /* Adjust to your image size */
+  background-image: url("https://dev-moscadesign.mystagingwebsite.com/wp-content/uploads/2025/11/ornamentPreLoader.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: fadeInOut 1.5s ease-in-out infinite;
+}
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 /*# sourceMappingURL=newStyles.css.map */
