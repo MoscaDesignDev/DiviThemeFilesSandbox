@@ -1,25 +1,49 @@
 
 
 <!-- Desktop Top Products Div  -->
-<hr>
-
-<div class="custom-result-count"></div>
+<div class="custom-result-count">
+</div>
 
 <script>
 jQuery(document).ready(function($) {
   function updateCount() {
-      setTimeout(function() {
-          // Count only in the FIRST products container (desktop)
-          var count = $('ul.products:first li.product:visible').length;
-          
-          $('.custom-result-count').html('<p>Showing ' + count + ' results</p>');
-          console.log('Desktop count:', count);
-      }, 500);
+    setTimeout(function() {
+        // Count only in the FIRST products container (desktop)
+        var count = $('ul.products:first li.product:visible').length;
+        
+        // Get selected filter names
+        var selectedFilters = [];
+        $('.wpfCheckbox input[type="checkbox"]:checked').each(function() {
+            // Go up one level and find next .wpfDisplay
+            var filterLabel = $(this).closest('.wpfCheckbox').parent().find('.wpfDisplay .wpfFilterTaxNameWrapper').text().trim();
+            
+            if (filterLabel) {
+                selectedFilters.push(filterLabel);
+            }
+        });
+        
+        // Build the HTML
+        var html = '<p>Showing ' + count + ' Results</p>';
+        
+        if (selectedFilters.length > 0) {
+          // Map each filter name to a new array where it's wrapped in <span> tags
+          var wrappedFilters = selectedFilters.map(function(filterName) {
+              return '<span>' + filterName + '</span>';
+          });
+
+          // Join the wrapped filters with a simple separator (like a comma and space)
+          html += '<p class="custom-result-count-active-filter"><strong>Filters Applied:</strong> ' + wrappedFilters.join(' ') + '</p>';
+        }
+        
+        $('.custom-result-count').html(html);
+        console.log('Desktop count:', count);
+    }, 500);
   }
   
+  // ADD THESE LINES BACK:
   $(document).on('berocket_ajax_products_loaded berocket_ajax_filtering_end', updateCount);
   $(document).ajaxComplete(updateCount);
-  updateCount();
+  updateCount(); // Call on initial page load
 
   // Filter and Clear Buttons styles
   function updateFilterButtonStates() {
@@ -30,15 +54,18 @@ jQuery(document).ready(function($) {
     });
     
     var $clearButton = $('.wpfClearButton');
+    var $resultCount = $('.custom-result-count');
     
     if (hasActiveFilters) {
         // Filters are active
         $filterButton.addClass('has-active-filters').removeClass('no-active-filters');
         $clearButton.addClass('has-active-filters').removeClass('no-active-filters');
+        $resultCount.addClass('has-active-filters').removeClass('no-active-filters');
     } else {
         // No filters active
         $filterButton.addClass('no-active-filters').removeClass('has-active-filters');
         $clearButton.addClass('no-active-filters').removeClass('has-active-filters');
+        $resultCount.addClass('no-active-filters').removeClass('has-active-filters');
     }
     
     console.log('Filter buttons updated. Active filters:', hasActiveFilters);
@@ -64,34 +91,55 @@ jQuery(document).ready(function($) {
 
 });
 </script>
-
-[products category="specialty-colors" limit="-1" per_page="-1" columns="5"]
-
-
-
 
 
 <!-- Mobile Bottom Products Div *** Note that these are slightly different -->
-<div class="custom-result-count-mobile"></div>
+<div class="custom-result-count-mobile">
+</div>
 
 <script>
 jQuery(document).ready(function($) {
-    function updateCountMobile() {
-        setTimeout(function() {
-            // Count only in the LAST/SECOND products container (mobile)
-            var count = $('ul.products:last li.product:visible').length;
+  function updateCountMobile() {
+    setTimeout(function() {
+        // Count only in the FIRST products container (desktop)
+        var count = $('ul.products:last li.product:visible').length;
+        
+        // Get selected filter names
+        var selectedFilters = [];
+        $('.wpfCheckbox input[type="checkbox"]:checked').each(function() {
+            // Go up one level and find next .wpfDisplay
+            var filterLabel = $(this).closest('.wpfCheckbox').parent().find('.wpfDisplay .wpfFilterTaxNameWrapper').text().trim();
             
-            $('.custom-result-count-mobile').html('<p>Showing ' + count + ' results</p>');
-            console.log('Mobile count:', count);
-        }, 500);
-    }
-    
-    $(document).on('berocket_ajax_products_loaded berocket_ajax_filtering_end', updateCountMobile);
-    $(document).ajaxComplete(updateCountMobile);
-    updateCountMobile();
+            if (filterLabel) {
+                selectedFilters.push(filterLabel);
+            }
+        });
+        
+        // Build the HTML
+        var html = '<p>Showing ' + count + ' Results</p>';
+        
+        if (selectedFilters.length > 0) {
+          // Map each filter name to a new array where it's wrapped in <span> tags
+          var wrappedFilters = selectedFilters.map(function(filterName) {
+              return '<span>' + filterName + '</span>';
+          });
+
+          // Join the wrapped filters with a simple separator (like a comma and space)
+          html += '<p class="custom-result-count-active-filter-mobile"><strong>Filters Applied:</strong> ' + wrappedFilters.join(' ') + '</p>';
+        }
+        
+        $('.custom-result-count-mobile').html(html);
+        console.log('Mobile count:', count);
+    }, 500);
+  }
+  
+  // ADD THESE LINES BACK:
+  $(document).on('berocket_ajax_products_loaded berocket_ajax_filtering_end', updateCountMobile);
+  $(document).ajaxComplete(updateCountMobile);
+  updateCountMobile(); // Call on initial page load
 
   // Filter and Clear Buttons styles
-  function updateFilterButtonStates() {
+  function updateFilterButtonStatesMobile() {
     var hasActiveFilters = $('.wpfCheckbox input[type="checkbox"]:checked').length > 0;
     
     var $filterButton = $('.wpfFilterButton, button[type="submit"]').filter(function() {
@@ -99,15 +147,18 @@ jQuery(document).ready(function($) {
     });
     
     var $clearButton = $('.wpfClearButton');
+    var $resultCount = $('.custom-result-count-mobile');
     
     if (hasActiveFilters) {
         // Filters are active
         $filterButton.addClass('has-active-filters').removeClass('no-active-filters');
         $clearButton.addClass('has-active-filters').removeClass('no-active-filters');
+        $resultCount.addClass('has-active-filters').removeClass('no-active-filters');
     } else {
         // No filters active
         $filterButton.addClass('no-active-filters').removeClass('has-active-filters');
         $clearButton.addClass('no-active-filters').removeClass('has-active-filters');
+        $resultCount.addClass('no-active-filters').removeClass('has-active-filters');
     }
     
     console.log('Filter buttons updated. Active filters:', hasActiveFilters);
@@ -115,25 +166,25 @@ jQuery(document).ready(function($) {
 
   // Update when Filter or Clear buttons are clicked
   $(document).on('click', '.wpfFilterButton, .wpfClearButton, button[type="submit"]', function() {
-      setTimeout(updateFilterButtonStates, 500);
+      setTimeout(updateFilterButtonStatesMobile, 500);
   });
 
   // Update after AJAX completes
   $(document).on('berocket_ajax_products_loaded berocket_ajax_filtering_end', function() {
-      setTimeout(updateFilterButtonStates, 300);
+      setTimeout(updateFilterButtonStatesMobile, 300);
   });
 
   // Update on AJAX completion
   $(document).ajaxComplete(function() {
-      setTimeout(updateFilterButtonStates, 500);
+      setTimeout(updateFilterButtonStatesMobile, 500);
   });
 
   // Initial state
-  updateFilterButtonStates();
+  updateFilterButtonStatesMobile();
+
 });
 </script>
 
-[products category="specialty-colors" limit="-1" per_page="-1" columns="4"]
 
 
 

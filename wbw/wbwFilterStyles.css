@@ -73,4 +73,60 @@
   margin-left: 26px !important;
 }
 
+.custom-result-count,
+.custom-result-count-mobile {
+  color: #0251b8;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 18px;
+}
+.custom-result-count.no-active-filters .custom-result-count-active-filter,
+.custom-result-count-mobile.no-active-filters .custom-result-count-active-filter {
+  display: none;
+}
+.custom-result-count.has-active-filters .custom-result-count-active-filter,
+.custom-result-count.has-active-filters .custom-result-count-active-filter-mobile,
+.custom-result-count-mobile.has-active-filters .custom-result-count-active-filter,
+.custom-result-count-mobile.has-active-filters .custom-result-count-active-filter-mobile {
+  display: inline-block;
+  color: #434343;
+  font-size: 14px;
+  line-height: 29px;
+  padding: 7px 0 0 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.21);
+}
+.custom-result-count.has-active-filters .custom-result-count-active-filter strong,
+.custom-result-count.has-active-filters .custom-result-count-active-filter-mobile strong,
+.custom-result-count-mobile.has-active-filters .custom-result-count-active-filter strong,
+.custom-result-count-mobile.has-active-filters .custom-result-count-active-filter-mobile strong {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.custom-result-count.has-active-filters .custom-result-count-active-filter span,
+.custom-result-count.has-active-filters .custom-result-count-active-filter-mobile span,
+.custom-result-count-mobile.has-active-filters .custom-result-count-active-filter span,
+.custom-result-count-mobile.has-active-filters .custom-result-count-active-filter-mobile span {
+  position: relative;
+  font-weight: bold;
+  background-color: #0251b8;
+  color: #fff;
+  padding: 4px 6px 4px 22px;
+  border-radius: 12px 4px 4px 12px;
+}
+.custom-result-count.has-active-filters .custom-result-count-active-filter span::before,
+.custom-result-count.has-active-filters .custom-result-count-active-filter-mobile span::before,
+.custom-result-count-mobile.has-active-filters .custom-result-count-active-filter span::before,
+.custom-result-count-mobile.has-active-filters .custom-result-count-active-filter-mobile span::before {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 7px;
+  transform: translate(0, -50%);
+  width: 11px;
+  height: 11px;
+  background: url("https://moscadesign.com/wp-content/uploads/2025/11/productFiltersButtonChecked.png") !important;
+  background-size: 100% 100% !important;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(135deg) brightness(106%) contrast(104%);
+}
+
 /*# sourceMappingURL=wbwFilterStyles.css.map */
