@@ -96,7 +96,58 @@
             }
             .wpfDisplay {
               margin-left: 26px !important;
+              font-weight: bold !important;
             }
+          }
+        }
+      }
+      .ui-slider {
+        background: transparent;
+        border: none !important;
+        background-color: #fff !important;
+        border-radius: 2px;
+        .ui-slider-range {
+          background-color: rgba(2, 81, 184, 0.3) !important;
+        }
+        .ui-slider-handle {
+          background: #fff;
+          border: 2px solid #c9c9c9 !important;
+          border-radius: 4px !important;
+          box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.02);
+          &.ui-state-hover,
+          &.ui-state-focus {
+            border-color: #c9c9c9 !important;
+
+          }
+        }
+        &.has-active-filters {
+          .ui-slider-range {
+            background-color: rgba(2, 81, 184) !important;
+          }
+        }
+        + .wpfPriceInputs {
+          position: relative;
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+          .wpfFilterDelimeter {
+            margin: 0 auto !important;
+          }
+          .wpfPriceRangeField {
+            width: auto !important;
+            font-size: 15px !important;
+            font-weight: bold !important;
+            color: #0251b8 !important;
+            &#wpfMinPrice {
+              text-align: left !important;
+            }
+            &#wpfMaxPrice {
+              text-align: right !important;
+            }
+          }
+          .wpfCurrencySymbol {
+            color: #505050 !important;
+            font-weight: normal !important;
           }
         }
       }
@@ -152,3 +203,22 @@
     }
   }
 }
+
+// Hide Pagination Results (Displaying above)
+.woocommerce {
+  .alg-wc-products-per-page-form {
+    display: none !important;
+  }
+  .orderby {
+    display: none !important;
+  }
+  p {
+    &.woocommerce-result-count {
+      display: none !important;
+    }
+  }
+}
+
+
+
+

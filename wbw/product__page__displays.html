@@ -1,9 +1,13 @@
 
 
-<!-- Desktop Top Products Div  -->
+<!-- DESKTOP -->
+
+
+<!-- Desktop Placholder Title  -->
 <div class="custom-result-count">
 </div>
 
+<!-- Desktop Products Div Scripts (No Pagination) -->
 <script>
 jQuery(document).ready(function($) {
   function updateCount() {
@@ -19,6 +23,31 @@ jQuery(document).ready(function($) {
             
             if (filterLabel) {
                 selectedFilters.push(filterLabel);
+            }
+        });
+        
+        // Check for price range filter
+        var priceRangeActive = false;
+        $('input[type="range"]').each(function() {
+            var min = $(this).attr('min') || 0;
+            var max = $(this).attr('max') || 0;
+            var currentValue = $(this).val();
+            
+            // Check if the range has been moved from default position
+            if (currentValue != max && currentValue != min) {
+                priceRangeActive = true;
+                var priceLabel = 'Price: $' + currentValue;
+                
+                // Or if there are two range inputs (min and max)
+                var $priceInputs = $(this).closest('.wpfFilterContent, .wpfPriceRange').find('input[type="range"]');
+                if ($priceInputs.length === 2) {
+                    var minVal = $priceInputs.eq(0).val();
+                    var maxVal = $priceInputs.eq(1).val();
+                    priceLabel = 'Price: $' + minVal + ' - $' + maxVal;
+                }
+                
+                selectedFilters.push(priceLabel);
+                return false; // Break the loop after finding price filter
             }
         });
         
@@ -48,6 +77,20 @@ jQuery(document).ready(function($) {
   // Filter and Clear Buttons styles
   function updateFilterButtonStates() {
     var hasActiveFilters = $('.wpfCheckbox input[type="checkbox"]:checked').length > 0;
+    
+    // Also check for price range
+    var priceRangeActive = false;
+    $('input[type="range"]').each(function() {
+        var min = $(this).attr('min') || 0;
+        var max = $(this).attr('max') || 0;
+        var currentValue = $(this).val();
+        if (currentValue != max && currentValue != min) {
+            priceRangeActive = true;
+            return false;
+        }
+    });
+    
+    hasActiveFilters = hasActiveFilters || priceRangeActive;
     
     var $filterButton = $('.wpfFilterButton, button[type="submit"]').filter(function() {
         return $(this).text().toLowerCase().includes('filter');
@@ -85,6 +128,11 @@ jQuery(document).ready(function($) {
   $(document).ajaxComplete(function() {
       setTimeout(updateFilterButtonStates, 500);
   });
+  
+  // Also listen for range input changes
+  $(document).on('change input', 'input[type="range"]', function() {
+      setTimeout(updateFilterButtonStates, 100);
+  });
 
   // Initial state
   updateFilterButtonStates();
@@ -92,44 +140,281 @@ jQuery(document).ready(function($) {
 });
 </script>
 
+<!-- Desktop Products Div Scripts (Pagination) -->
+<script>
+  jQuery(document).ready(function($) {
+      
+    // Function to apply/remove active classes based on the filter status
+    function applyButtonClasses(hasActiveFilters) {
+        // Use the most specific selector possible to win the CSS race
+        var $clearButton = $('.wpfFilterButtons .wpfClearButton');
+        var $filterButton = $('.wpfFilterButtons .wpfFilterButton');
+        var $resultCount = $('.custom-result-count');
+        var $sliderRange = $('.wpfPriceFilterRange');
 
-<!-- Mobile Bottom Products Div *** Note that these are slightly different -->
+        if (hasActiveFilters) {
+            // ADD the active class and immediately remove the inactive one
+            $clearButton.addClass('has-active-filters').removeClass('no-active-filters');
+            $filterButton.addClass('has-active-filters').removeClass('no-active-filters');
+            $resultCount.addClass('has-active-filters').removeClass('no-active-filters');
+            $sliderRange.addClass('has-active-filters').removeClass('no-active-filters');
+            // console.log('Class Applied: has-active-filters'); // Use for testing confirmation
+        } else {
+            // REMOVE the active class and immediately add the inactive one
+            $clearButton.removeClass('has-active-filters').addClass('no-active-filters');
+            $filterButton.removeClass('has-active-filters').addClass('no-active-filters');
+            $resultCount.removeClass('has-active-filters').addClass('no-active-filters');
+            $sliderRange.removeClass('has-active-filters').addClass('no-active-filters');
+        }
+    }
+
+    // --- 1. FUNCTION TO UPDATE COUNT AND ACTIVE FILTERS ---
+    function updateCount() {
+        // Use a short delay to ensure AJAX is complete and values are updated
+        setTimeout(function() {
+            var wooCommerceCount = $('.woocommerce-result-count').first().text().trim();
+            
+            if (!wooCommerceCount) {
+                var count = $('ul.products:first li.product:visible').length;
+                wooCommerceCount = 'Showing ' + count + ' Results';
+            }
+            
+            var selectedFilters = [];
+            $('.wpfCheckbox input[type="checkbox"]:checked').each(function() {
+                var filterLabel = $(this).closest('.wpfCheckbox').parent().find('.wpfDisplay .wpfFilterTaxNameWrapper').text().trim();
+                if (filterLabel) {
+                    selectedFilters.push(filterLabel);
+                }
+            });
+            
+            // --- PRICE RANGE CHECK ---
+            var $priceFilterWrapper = $('.wpfFilterWrapper');
+            if ($priceFilterWrapper.length) {
+                
+                // 1. GET DEFAULT (STATIC) LIMITS from the input attributes
+                var $staticMinInput = $priceFilterWrapper.find('#wpfMinPrice'); 
+                var $staticMaxInput = $priceFilterWrapper.find('#wpfMaxPrice');
+                
+                var defaultMin = $staticMinInput.length ? parseInt($staticMinInput.attr('min')) : 0;
+                var defaultMax = $staticMaxInput.length ? parseInt($staticMaxInput.attr('max')) : 0;
+                
+                // 2. GET CURRENT (BUFFERED) VALUES from the visible divs
+                var $bufferMin = $priceFilterWrapper.find('.wpfVisibleBufferMin');
+                var $bufferMax = $priceFilterWrapper.find('.wpfVisibleBufferMax');
+                
+                // --- CURRENT MIN FIX (Slicing logic) ---
+                var rawMinText = $bufferMin.length ? $bufferMin.text() : String(defaultMin);
+                var cleanMinString = rawMinText.replace(/\D/g, ''); 
+                var currentMin;
+
+                if (cleanMinString.length > 0) {
+                    if (cleanMinString.length % 2 === 0 && cleanMinString.length > 1) {
+                        currentMin = parseInt(cleanMinString.substring(0, cleanMinString.length / 2));
+                    } else {
+                        currentMin = parseInt(cleanMinString);
+                    }
+                } else {
+                    currentMin = defaultMin;
+                }
+
+                // --- CURRENT MAX FIX (Slicing logic) ---
+                var rawMaxText = $bufferMax.length ? $bufferMax.text() : String(defaultMax);
+                var cleanMaxString = rawMaxText.replace(/\D/g, ''); 
+                var currentMax;
+
+                if (cleanMaxString.length > 0) {
+                    if (cleanMaxString.length % 2 === 0 && cleanMaxString.length > 1) {
+                        currentMax = parseInt(cleanMaxString.substring(0, cleanMaxString.length / 2));
+                    } else {
+                        currentMax = parseInt(cleanMaxString);
+                    }
+                } else {
+                    currentMax = defaultMax;
+                }
+
+                currentMin = parseInt(currentMin);
+                currentMax = parseInt(currentMax);
+
+                defaultMin = parseInt(defaultMin);
+                defaultMax = parseInt(defaultMax);
+                
+                // New formatted with a comma
+                if (currentMin !== defaultMin || currentMax !== defaultMax) {
+                    
+                    // --- NEW: Format numbers with thousands separators ---
+                    var formattedMin = currentMin.toLocaleString('en-US'); 
+                    var formattedMax = currentMax.toLocaleString('en-US');
+                    // ----------------------------------------------------
+                    
+                    // Use the formatted variables in the label
+                    var priceLabel = 'Price: $' + formattedMin + ' - $' + formattedMax;
+                    selectedFilters.push(priceLabel);
+                    // ... (rest of the logic)
+                }
+            }
+            
+            var html = '<p>' + wooCommerceCount + '</p>';
+            
+            if (selectedFilters.length > 0) {
+                var wrappedFilters = selectedFilters.map(function(filterName) {
+                    return '<span>' + filterName + '</span>';
+                });
+
+                html += '<p class="custom-result-count-active-filter"><strong>Filters Applied:</strong> ' + wrappedFilters.join(' ') + '</p>';
+            }
+            
+            $('.custom-result-count').html(html);
+        }, 500);
+    }
+    
+    // --- 2. FUNCTION TO UPDATE BUTTON STATES (Active/Inactive) ---
+    function updateFilterButtonStates() {
+        var hasActiveFilters = $('.wpfCheckbox input[type="checkbox"]:checked').length > 0;
+        var priceRangeActive = false;
+        var $priceFilterWrapper = $('.wpfFilterWrapper');
+
+        if ($priceFilterWrapper.length) {
+            
+            // 1. GET DEFAULT (STATIC) LIMITS
+            var $staticMinInput = $priceFilterWrapper.find('#wpfMinPrice'); 
+            var $staticMaxInput = $priceFilterWrapper.find('#wpfMaxPrice');
+
+            var defaultMin = $staticMinInput.length ? parseInt($staticMinInput.attr('min')) : 0;
+            var defaultMax = $staticMaxInput.length ? parseInt($staticMaxInput.attr('max')) : 0;
+            
+            // 2. GET CURRENT (BUFFERED) VALUES
+            var $bufferMin = $priceFilterWrapper.find('.wpfVisibleBufferMin');
+            var $bufferMax = $priceFilterWrapper.find('.wpfVisibleBufferMax');
+            
+            // --- CURRENT MIN FIX (Slicing logic) ---
+            var rawMinText = $bufferMin.length ? $bufferMin.text() : String(defaultMin);
+            var cleanMinString = rawMinText.replace(/\D/g, ''); 
+            var currentMin;
+
+            if (cleanMinString.length > 0) {
+                if (cleanMinString.length % 2 === 0 && cleanMinString.length > 1) {
+                    currentMin = parseInt(cleanMinString.substring(0, cleanMinString.length / 2));
+                } else {
+                    currentMin = parseInt(cleanMinString);
+                }
+            } else {
+                currentMin = defaultMin;
+            }
+
+            // --- CURRENT MAX FIX (Slicing logic) ---
+            var rawMaxText = $bufferMax.length ? $bufferMax.text() : String(defaultMax);
+            var cleanMaxString = rawMaxText.replace(/\D/g, ''); 
+            var currentMax;
+
+            if (cleanMaxString.length > 0) {
+                if (cleanMaxString.length % 2 === 0 && cleanMaxString.length > 1) {
+                    currentMax = parseInt(cleanMaxString.substring(0, cleanMaxString.length / 2));
+                } else {
+                    currentMax = parseInt(cleanMaxString);
+                }
+            } else {
+                currentMax = defaultMax;
+            }
+
+            currentMin = parseInt(currentMin);
+            currentMax = parseInt(currentMax);
+
+            defaultMin = parseInt(defaultMin);
+            defaultMax = parseInt(defaultMax);
+            
+            // Check if current range differs from default range
+            if (currentMin !== defaultMin || currentMax !== defaultMax) {
+                priceRangeActive = true;
+            }
+        }
+        
+        hasActiveFilters = hasActiveFilters || priceRangeActive;
+        
+        // Call the dedicated function to apply/remove classes
+        applyButtonClasses(hasActiveFilters);
+        
+        // console.log('Filter buttons updated. Active filters:', hasActiveFilters); // For debugging
+    }
+
+    // --- 3. EVENT LISTENERS ---
+    
+    // Initial call on page load
+    updateCount(); 
+    updateFilterButtonStates();
+
+    // Listeners for general AJAX completion/filter updates
+    $(document).on('berocket_ajax_products_loaded berocket_ajax_filtering_end', updateCount);
+    $(document).ajaxComplete(updateCount);
+
+    // Update when Filter or Clear buttons are clicked
+    $(document).on('click', '.wpfFilterButton, .wpfClearButton, button[type="submit"]', function() {
+        // A small delay to ensure the click action registers
+        setTimeout(updateFilterButtonStates, 500);
+    });
+    
+    // Listeners for the price range input change
+    $(document).on('change', '#wpfMinPrice, #wpfMaxPrice', function() {
+        // This event fires when the input value is changed (i.e., by the slider release)
+        setTimeout(function() {
+            updateCount();
+            updateFilterButtonStates();
+        }, 500); 
+    });
+    
+    // --- RACE CONDITION FIX ---
+    // This executes your logic LAST, 1.5 seconds after the plugin reports AJAX completion, 
+    // guaranteeing that your class changes override the plugin's default resets.
+    $(document).ajaxComplete(function() {
+        setTimeout(updateFilterButtonStates, 1500); 
+    });
+
+  });
+</script>
+
+
+
+
+<!-- MOBILE -->
+
+
+<!-- Mobile Placeholder Title -->
 <div class="custom-result-count-mobile">
 </div>
 
+<!-- Mobile Products Div Scripts (No Pagination) -->
 <script>
 jQuery(document).ready(function($) {
   function updateCountMobile() {
     setTimeout(function() {
-        // Count only in the FIRST products container (desktop)
-        var count = $('ul.products:last li.product:visible').length;
-        
-        // Get selected filter names
-        var selectedFilters = [];
-        $('.wpfCheckbox input[type="checkbox"]:checked').each(function() {
-            // Go up one level and find next .wpfDisplay
-            var filterLabel = $(this).closest('.wpfCheckbox').parent().find('.wpfDisplay .wpfFilterTaxNameWrapper').text().trim();
-            
-            if (filterLabel) {
-                selectedFilters.push(filterLabel);
-            }
+      // Count only in the FIRST products container (desktop)
+      var count = $('ul.products:last li.product:visible').length;
+      
+      // Get selected filter names
+      var selectedFilters = [];
+      $('.wpfCheckbox input[type="checkbox"]:checked').each(function() {
+          // Go up one level and find next .wpfDisplay
+          var filterLabel = $(this).closest('.wpfCheckbox').parent().find('.wpfDisplay .wpfFilterTaxNameWrapper').text().trim();
+          
+          if (filterLabel) {
+              selectedFilters.push(filterLabel);
+          }
+      });
+      
+      // Build the HTML
+      var html = '<p>Showing ' + count + ' Results</p>';
+      
+      if (selectedFilters.length > 0) {
+        // Map each filter name to a new array where it's wrapped in <span> tags
+        var wrappedFilters = selectedFilters.map(function(filterName) {
+            return '<span>' + filterName + '</span>';
         });
-        
-        // Build the HTML
-        var html = '<p>Showing ' + count + ' Results</p>';
-        
-        if (selectedFilters.length > 0) {
-          // Map each filter name to a new array where it's wrapped in <span> tags
-          var wrappedFilters = selectedFilters.map(function(filterName) {
-              return '<span>' + filterName + '</span>';
-          });
 
-          // Join the wrapped filters with a simple separator (like a comma and space)
-          html += '<p class="custom-result-count-active-filter-mobile"><strong>Filters Applied:</strong> ' + wrappedFilters.join(' ') + '</p>';
-        }
-        
-        $('.custom-result-count-mobile').html(html);
-        console.log('Mobile count:', count);
+        // Join the wrapped filters with a simple separator (like a comma and space)
+        html += '<p class="custom-result-count-active-filter-mobile"><strong>Filters Applied:</strong> ' + wrappedFilters.join(' ') + '</p>';
+      }
+      
+      $('.custom-result-count-mobile').html(html);
+      console.log('Mobile count:', count);
     }, 500);
   }
   
@@ -185,6 +470,236 @@ jQuery(document).ready(function($) {
 });
 </script>
 
+<!-- Mobile Products Div Scripts (Pagination) -->
+<script>
+  jQuery(document).ready(function($) {
+      
+    // Function to apply/remove active classes based on the filter status
+    function applyButtonClasses(hasActiveFilters) {
+        // Use the most specific selector possible to win the CSS race
+        var $clearButton = $('.wpfFilterButtons .wpfClearButton');
+        var $filterButton = $('.wpfFilterButtons .wpfFilterButton');
+        var $resultCount = $('.custom-result-count-mobile');
+        var $sliderRange = $('.wpfPriceFilterRange');
+
+        if (hasActiveFilters) {
+            // ADD the active class and immediately remove the inactive one
+            $clearButton.addClass('has-active-filters').removeClass('no-active-filters');
+            $filterButton.addClass('has-active-filters').removeClass('no-active-filters');
+            $resultCount.addClass('has-active-filters').removeClass('no-active-filters');
+            $sliderRange.addClass('has-active-filters').removeClass('no-active-filters');
+            // console.log('Class Applied: has-active-filters'); // Use for testing confirmation
+        } else {
+            // REMOVE the active class and immediately add the inactive one
+            $clearButton.removeClass('has-active-filters').addClass('no-active-filters');
+            $filterButton.removeClass('has-active-filters').addClass('no-active-filters');
+            $resultCount.removeClass('has-active-filters').addClass('no-active-filters');
+            $sliderRange.removeClass('has-active-filters').addClass('no-active-filters');
+        }
+    }
+
+    // --- 1. FUNCTION TO UPDATE COUNT AND ACTIVE FILTERS ---
+    function updateCountMobile() {
+        // Use a short delay to ensure AJAX is complete and values are updated
+        setTimeout(function() {
+            var wooCommerceCount = $('.woocommerce-result-count').first().text().trim();
+            
+            if (!wooCommerceCount) {
+                var count = $('ul.products:last li.product:visible').length;
+                wooCommerceCount = 'Showing ' + count + ' Results';
+            }
+            
+            var selectedFilters = [];
+            $('.wpfCheckbox input[type="checkbox"]:checked').each(function() {
+                var filterLabel = $(this).closest('.wpfCheckbox').parent().find('.wpfDisplay .wpfFilterTaxNameWrapper').text().trim();
+                if (filterLabel) {
+                    selectedFilters.push(filterLabel);
+                }
+            });
+            
+            // --- PRICE RANGE CHECK ---
+            var $priceFilterWrapper = $('.wpfFilterWrapper');
+            if ($priceFilterWrapper.length) {
+                
+                // 1. GET DEFAULT (STATIC) LIMITS from the input attributes
+                var $staticMinInput = $priceFilterWrapper.find('#wpfMinPrice'); 
+                var $staticMaxInput = $priceFilterWrapper.find('#wpfMaxPrice');
+                
+                var defaultMin = $staticMinInput.length ? parseInt($staticMinInput.attr('min')) : 0;
+                var defaultMax = $staticMaxInput.length ? parseInt($staticMaxInput.attr('max')) : 0;
+                
+                // 2. GET CURRENT (BUFFERED) VALUES from the visible divs
+                var $bufferMin = $priceFilterWrapper.find('.wpfVisibleBufferMin');
+                var $bufferMax = $priceFilterWrapper.find('.wpfVisibleBufferMax');
+                
+                // --- CURRENT MIN FIX (Slicing logic) ---
+                var rawMinText = $bufferMin.length ? $bufferMin.text() : String(defaultMin);
+                var cleanMinString = rawMinText.replace(/\D/g, ''); 
+                var currentMin;
+
+                if (cleanMinString.length > 0) {
+                    if (cleanMinString.length % 2 === 0 && cleanMinString.length > 1) {
+                        currentMin = parseInt(cleanMinString.substring(0, cleanMinString.length / 2));
+                    } else {
+                        currentMin = parseInt(cleanMinString);
+                    }
+                } else {
+                    currentMin = defaultMin;
+                }
+
+                // --- CURRENT MAX FIX (Slicing logic) ---
+                var rawMaxText = $bufferMax.length ? $bufferMax.text() : String(defaultMax);
+                var cleanMaxString = rawMaxText.replace(/\D/g, ''); 
+                var currentMax;
+
+                if (cleanMaxString.length > 0) {
+                    if (cleanMaxString.length % 2 === 0 && cleanMaxString.length > 1) {
+                        currentMax = parseInt(cleanMaxString.substring(0, cleanMaxString.length / 2));
+                    } else {
+                        currentMax = parseInt(cleanMaxString);
+                    }
+                } else {
+                    currentMax = defaultMax;
+                }
+
+                currentMin = parseInt(currentMin);
+                currentMax = parseInt(currentMax);
+
+                defaultMin = parseInt(defaultMin);
+                defaultMax = parseInt(defaultMax);
+                
+                // New formatted with a comma
+                if (currentMin !== defaultMin || currentMax !== defaultMax) {
+                    
+                    // --- NEW: Format numbers with thousands separators ---
+                    var formattedMin = currentMin.toLocaleString('en-US'); 
+                    var formattedMax = currentMax.toLocaleString('en-US');
+                    // ----------------------------------------------------
+                    
+                    // Use the formatted variables in the label
+                    var priceLabel = 'Price: $' + formattedMin + ' - $' + formattedMax;
+                    selectedFilters.push(priceLabel);
+                    // ... (rest of the logic)
+                }
+            }
+            
+            var html = '<p>' + wooCommerceCount + '</p>';
+            
+            if (selectedFilters.length > 0) {
+                var wrappedFilters = selectedFilters.map(function(filterName) {
+                    return '<span>' + filterName + '</span>';
+                });
+
+                html += '<p class="custom-result-count-active-filter-mobile"><strong>Filters Applied:</strong> ' + wrappedFilters.join(' ') + '</p>';
+            }
+            
+            $('.custom-result-count-mobile').html(html);
+        }, 500);
+    }
+    
+    // --- 2. FUNCTION TO UPDATE BUTTON STATES (Active/Inactive) ---
+    function updateFilterButtonStatesMobile() {
+        var hasActiveFilters = $('.wpfCheckbox input[type="checkbox"]:checked').length > 0;
+        var priceRangeActive = false;
+        var $priceFilterWrapper = $('.wpfFilterWrapper');
+
+        if ($priceFilterWrapper.length) {
+            
+            // 1. GET DEFAULT (STATIC) LIMITS
+            var $staticMinInput = $priceFilterWrapper.find('#wpfMinPrice'); 
+            var $staticMaxInput = $priceFilterWrapper.find('#wpfMaxPrice');
+
+            var defaultMin = $staticMinInput.length ? parseInt($staticMinInput.attr('min')) : 0;
+            var defaultMax = $staticMaxInput.length ? parseInt($staticMaxInput.attr('max')) : 0;
+            
+            // 2. GET CURRENT (BUFFERED) VALUES
+            var $bufferMin = $priceFilterWrapper.find('.wpfVisibleBufferMin');
+            var $bufferMax = $priceFilterWrapper.find('.wpfVisibleBufferMax');
+            
+            // --- CURRENT MIN FIX (Slicing logic) ---
+            var rawMinText = $bufferMin.length ? $bufferMin.text() : String(defaultMin);
+            var cleanMinString = rawMinText.replace(/\D/g, ''); 
+            var currentMin;
+
+            if (cleanMinString.length > 0) {
+                if (cleanMinString.length % 2 === 0 && cleanMinString.length > 1) {
+                    currentMin = parseInt(cleanMinString.substring(0, cleanMinString.length / 2));
+                } else {
+                    currentMin = parseInt(cleanMinString);
+                }
+            } else {
+                currentMin = defaultMin;
+            }
+
+            // --- CURRENT MAX FIX (Slicing logic) ---
+            var rawMaxText = $bufferMax.length ? $bufferMax.text() : String(defaultMax);
+            var cleanMaxString = rawMaxText.replace(/\D/g, ''); 
+            var currentMax;
+
+            if (cleanMaxString.length > 0) {
+                if (cleanMaxString.length % 2 === 0 && cleanMaxString.length > 1) {
+                    currentMax = parseInt(cleanMaxString.substring(0, cleanMaxString.length / 2));
+                } else {
+                    currentMax = parseInt(cleanMaxString);
+                }
+            } else {
+                currentMax = defaultMax;
+            }
+
+            currentMin = parseInt(currentMin);
+            currentMax = parseInt(currentMax);
+
+            defaultMin = parseInt(defaultMin);
+            defaultMax = parseInt(defaultMax);
+            
+            // Check if current range differs from default range
+            if (currentMin !== defaultMin || currentMax !== defaultMax) {
+                priceRangeActive = true;
+            }
+        }
+        
+        hasActiveFilters = hasActiveFilters || priceRangeActive;
+        
+        // Call the dedicated function to apply/remove classes
+        applyButtonClasses(hasActiveFilters);
+        
+        // console.log('Filter buttons updated. Active filters:', hasActiveFilters); // For debugging
+    }
+
+    // --- 3. EVENT LISTENERS ---
+    
+    // Initial call on page load
+    updateCountMobile(); 
+    updateFilterButtonStatesMobile();
+
+    // Listeners for general AJAX completion/filter updates
+    $(document).on('berocket_ajax_products_loaded berocket_ajax_filtering_end', updateCountMobile);
+    $(document).ajaxComplete(updateCountMobile);
+
+    // Update when Filter or Clear buttons are clicked
+    $(document).on('click', '.wpfFilterButton, .wpfClearButton, button[type="submit"]', function() {
+        // A small delay to ensure the click action registers
+        setTimeout(updateFilterButtonStatesMobile, 500);
+    });
+    
+    // Listeners for the price range input change
+    $(document).on('change', '#wpfMinPrice, #wpfMaxPrice', function() {
+        // This event fires when the input value is changed (i.e., by the slider release)
+        setTimeout(function() {
+            updateCountMobile();
+            updateFilterButtonStatesMobile();
+        }, 500); 
+    });
+    
+    // --- RACE CONDITION FIX ---
+    // This executes your logic LAST, 1.5 seconds after the plugin reports AJAX completion, 
+    // guaranteeing that your class changes override the plugin's default resets.
+    $(document).ajaxComplete(function() {
+        setTimeout(updateFilterButtonStatesMobile, 1500); 
+    });
+
+  });
+</script>
 
 
 

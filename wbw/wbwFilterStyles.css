@@ -71,6 +71,53 @@
 }
 .wpfMainWrapper .wpfFilterWrapper .wpfFilterContent ul li .wpfLiLabel .wpfDisplay {
   margin-left: 26px !important;
+  font-weight: bold !important;
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterContent .ui-slider {
+  background: transparent;
+  border: none !important;
+  background-color: #fff !important;
+  border-radius: 2px;
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterContent .ui-slider .ui-slider-range {
+  background-color: rgba(2, 81, 184, 0.3) !important;
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterContent .ui-slider .ui-slider-handle {
+  background: #fff;
+  border: 2px solid #c9c9c9 !important;
+  border-radius: 4px !important;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.02);
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterContent .ui-slider .ui-slider-handle.ui-state-hover, .wpfMainWrapper .wpfFilterWrapper .wpfFilterContent .ui-slider .ui-slider-handle.ui-state-focus {
+  border-color: #c9c9c9 !important;
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterContent .ui-slider.has-active-filters .ui-slider-range {
+  background-color: rgb(2, 81, 184) !important;
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterContent .ui-slider + .wpfPriceInputs {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterContent .ui-slider + .wpfPriceInputs .wpfFilterDelimeter {
+  margin: 0 auto !important;
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterContent .ui-slider + .wpfPriceInputs .wpfPriceRangeField {
+  width: auto !important;
+  font-size: 15px !important;
+  font-weight: bold !important;
+  color: #0251b8 !important;
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterContent .ui-slider + .wpfPriceInputs .wpfPriceRangeField#wpfMinPrice {
+  text-align: left !important;
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterContent .ui-slider + .wpfPriceInputs .wpfPriceRangeField#wpfMaxPrice {
+  text-align: right !important;
+}
+.wpfMainWrapper .wpfFilterWrapper .wpfFilterContent .ui-slider + .wpfPriceInputs .wpfCurrencySymbol {
+  color: #505050 !important;
+  font-weight: normal !important;
 }
 
 .custom-result-count,
@@ -127,6 +174,16 @@
   background: url("https://moscadesign.com/wp-content/uploads/2025/11/productFiltersButtonChecked.png") !important;
   background-size: 100% 100% !important;
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(135deg) brightness(106%) contrast(104%);
+}
+
+.woocommerce .alg-wc-products-per-page-form {
+  display: none !important;
+}
+.woocommerce .orderby {
+  display: none !important;
+}
+.woocommerce p.woocommerce-result-count {
+  display: none !important;
 }
 
 /*# sourceMappingURL=wbwFilterStyles.css.map */
