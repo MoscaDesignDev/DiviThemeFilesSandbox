@@ -11,19 +11,40 @@
       .wpfButton {
         &.wpfFilterButton,
         &.wpfClearButton {
+          position: relative;
           float: none !important;
           transition: .2s !important;
           width: auto !important;
           flex: 1 !important;
+          font-size: 15px;
+          &::after {
+            position: absolute;
+            content: "";
+            right: 10px;
+            top: 50%;
+            transform: translate(0, -50%);
+          }
           &:hover {
             background: #467bbf !important;
           }
         }
         &.wpfFilterButton {
           background: #0251b8 !important;
+          &::after {
+            background: url('https://dev-moscadesign.mystagingwebsite.com/wp-content/uploads/2025/12/productFiltersButtonAdd.png') !important;
+            background-size: 100% 100% !important;
+            width: 12px;
+            height: 12px;
+          }
         }
         &.wpfClearButton {
           background: #c91136!important;
+          &::after {
+            background: url('https://dev-moscadesign.mystagingwebsite.com/wp-content/uploads/2025/12/productFiltersButtonRemove.png') !important;
+            background-size: 100% 100% !important;
+            width: 16px;
+            height: 16px;
+          }
         }
         &.wpfFilterButton {
           &.has-active-filters {
