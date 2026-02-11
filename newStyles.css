@@ -1,10 +1,23 @@
 .et_pb_section_video_bg .mejs-mediaelement {
   top: -7%;
 }
-@media (max-width: 767px) {
+@media (min-width: 1900px) {
+  .et_pb_section_video_bg .mejs-mediaelement {
+    top: -16%;
+  }
+}
+@media (max-width: 1550px) {
   .et_pb_section_video_bg .mejs-mediaelement {
     top: 0;
   }
+}
+
+p.woocommerce-store-notice.demo_store {
+  background-color: #5b0000 !important;
+  padding: 15px 0 !important;
+}
+p.woocommerce-store-notice.demo_store strong {
+  color: #ffe56c !important;
 }
 
 .et_pb_section_1_tb_header.et_pb_section::before {
@@ -12,7 +25,7 @@
   content: "";
   width: 100%;
   height: 100%;
-  background: transparent url("https://dev-moscadesign.mystagingwebsite.com/wp-content/uploads/2025/10/Snow.png") repeat 50% 50%;
+  background: transparent url("https://moscadesign.com/wp-content/uploads/2026/01/Header-SnowBG-transparent.png") repeat 50% 50%;
   background-size: 600px auto;
   opacity: 0.7;
 }
@@ -97,6 +110,20 @@
   50% {
     opacity: 1;
   }
+}
+
+.contact__icons.et_pb_blurb_0_tb_footer .et-pb-icon {
+  font-size: 20px;
+}
+
+.legal__links ul {
+  padding-left: 0;
+}
+.legal__links ul li {
+  list-style-type: none;
+}
+.legal__links ul li a {
+  color: #fff;
 }
 
 /*# sourceMappingURL=newStyles.css.map */
