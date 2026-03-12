@@ -2,15 +2,15 @@
 // Rotator Video BG Positioning
 
 .et_pb_section_video_bg {
-    .mejs-mediaelement {
-        top: -7%;
-        @media (min-width: 1900px) {
-          top: -16%;
-        }
-        @media (max-width: 1550px) {
-          top: 0;
-        }
-    }
+  .mejs-mediaelement {
+      top: -7%;
+      @media (min-width: 1900px) {
+        top: -16%;
+      }
+      @media (max-width: 1550px) {
+        top: 0;
+      }
+  }
 }
 
 // Implement the below when we want to add audio to the banner video
@@ -168,5 +168,175 @@ p {
   }
 }
 
+
+// Product Page 
+
+// Tablet/Mobile Header Styles
+.store__notice {
+  text-align: center;
+  color: #eaeaea;
+  font-size: 18px;
+  line-height: 23px;
+  font-weight: 700;
+}
+.main-nav-desktop {
+  @media (max-width: 980px) {
+    height: 0;
+    padding: 0;
+  }
+  .mega-toggle-blocks-right {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+    .mega-toggle-block {
+      button  {
+        &.mega-toggle-animated {
+          float: none !important;
+          border-radius: 4px !important;
+          background: #0d4c80 !important;
+          color: #fff !important;
+          border: none !important;
+          padding: 10px 10px !important;
+          cursor: pointer !important;
+
+          padding: 7px 7px !important;
+            .mega-toggle-animated-box {
+              width: 30px;
+              .mega-toggle-animated-inner {
+              width: 30px;
+            }
+          }
+
+        }
+      }
+    }
+    @media (max-width: 480px) {
+      top: 10px;
+      right: 6px;
+      .mega-toggle-block {
+        button {
+          padding: 7px 7px !important;
+          .mega-toggle-animated-box {
+            width: 30px !important;
+            height: 21px !important;
+            .mega-toggle-animated-inner {
+              width: 30px !important;
+              height: 3px !important;
+              &::before {
+                width: 30px !important;
+                height: 3px !important;
+                top: 8px !important;
+              }
+              &::after {
+                width: 30px !important;
+                height: 3px !important;
+                top: 16px !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Search Bar
+.search__bar__mobile {
+  @media (max-width: 980px) {
+    background-color: #132134 !important;
+    height: 120px;
+    .et_pb_fullwidth_header_container {
+      &.left {
+        .aws-container {
+        border-radius: 2em;
+        overflow: hidden;
+          form {
+            input {
+              &.aws-search-field {
+                border: none;
+                padding: 6px 20px;
+                background: #dedede;
+                font-size: 14px;
+              }
+            }
+            .aws-search-btn {
+              background: #dedede !important;
+              border: none !important;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 980px) and (min-width: 768px) {
+    .et_pb_fullwidth_header_container {
+      &.left {
+        .aws-container {
+          margin-top: 1em;
+        }
+      }
+    }
+  }
+  @media (max-width: 767px) {
+    .et_pb_fullwidth_header_container {
+      &.left {
+        width: 98% !important;
+        .aws-container {
+          margin-top: -.7em;
+        }
+      }
+    }
+  }
+}
+.aws-search-result {
+  border-radius: 4px !important;
+   @media (min-width: 981px) {
+    top: 110px !important;
+  }
+  @media (max-width: 980px) {
+    top: 322px !important;
+  }
+}
+
+
+ /* ── Hero video banner: responsive scaling on tablet & mobile ── */
+  @media (max-width: 980px) {
+
+    /* 1. Kill the fixed min-height Divi bakes in */
+    .et_pb_fullwidth_slider_1 .et_pb_slide,
+    .et_pb_fullwidth_slider_1.et_pb_slider {
+      min-height: 0 !important;
+      height: auto !important;
+    }
+
+    /* 2. Use aspect ratio box on the slide */
+    .et_pb_fullwidth_slider_1 .et_pb_slide {
+      position: relative !important;
+      padding-bottom: 42.19% !important; /* 1080/2560 = ~42.2% for your 2560x1080 video */
+    }
+
+    /* 3. Force the container and mejs player to fill that box */
+    .et_pb_fullwidth_slider_1 .et_pb_empty_slide,
+    .et_pb_fullwidth_slider_1 .mejs-container,
+    .et_pb_fullwidth_slider_1 .et_pb_section_video_bg {
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      margin: 0 !important;
+    }
+
+    /* 4. Force the video element itself to cover */
+    .et_pb_fullwidth_slider_1 video {
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      margin: 0 !important;
+    }
+  }
 
 
