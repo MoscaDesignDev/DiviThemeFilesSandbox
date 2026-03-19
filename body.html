@@ -62,11 +62,36 @@ s0.parentNode.insertBefore(s1,s0);
 <!--End of Tawk.to Script-->
 
 
+<!-- Mobile Nav Hamburger Scroll BG Bar -->
+<script>
+(function() {
+  console.log('[Hamburger] Script loaded');
 
+  window.addEventListener('scroll', function() {
+    var nav = document.querySelector('.main-nav-desktop');
 
+    if (!nav) {
+      console.warn('[Hamburger] .main-nav-desktop not found on scroll');
+      return;
+    }
 
+    if (window.scrollY > 200) {
+      if (!nav.classList.contains('scrolled-bar')) {
+        nav.classList.add('scrolled-bar');
+        console.log('[Hamburger] Class ADDED');
+      }
+    } else {
+      if (nav.classList.contains('scrolled-bar')) {
+        nav.classList.remove('scrolled-bar');
+        console.log('[Hamburger] Class REMOVED');
+      }
+    }
+  }, { passive: true });
 
-
+  console.log('[Hamburger] Scroll listener attached');
+})();
+</script>
+<!-- End Mobile Nav Hamburger Scroll BG Bar -->
 
 
 
