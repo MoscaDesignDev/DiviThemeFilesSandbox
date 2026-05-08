@@ -1,0 +1,85 @@
+
+
+
+<!-- Page Shortcode, classes, anchor tag IDs -->
+
+
+<h2 class="featured__title"><img src="https://moscadesign.com/wp-content/uploads/2026/04/LPTitleIcon-Candy.png" alt="Candy">Candy</h2>
+[products category="1468" limit="-1" columns="5" paginate="true"]
+
+class: featured-candy
+
+anchor tag desktop: featured-candy-anchor-desktop
+
+anchor tag mobile: featured-candy-anchor-mobile
+
+
+
+
+
+<h2 class="featured__title"><img src="https://moscadesign.com/wp-content/uploads/2026/04/LPTitleIcon-Nautical.png" alt="Candy">Nautical</h2>
+[products category="1469" limit="-1" columns="5" paginate="true"]
+
+class: featured-nautical
+
+anchor tag desktop: featured-nautical-anchor-desktop
+
+anchor tag mobile: featured-nautical-anchor-mobile
+
+
+
+
+
+<!-- Pagea Btns -->
+
+
+
+<!-- Desktop -->
+<div class="featured__anchor__links"><a href="#featured-candy-anchor-desktop" class="candy"><img src="https://moscadesign.com/wp-content/uploads/2026/04/IceCreamConeIcon-Wht.png" alt="Candy">Candy<img src="https://moscadesign.com/wp-content/uploads/2026/04/IconLongArrowDown-Pink.png" alt="arrow down"></a><a href="#featured-nautical-anchor-desktop" class="nautical"><img src="https://moscadesign.com/wp-content/uploads/2026/04/NauticalFishIcon-Wht.png" alt="Nautical">Nautical<img src="https://moscadesign.com/wp-content/uploads/2026/04/IconLongArrowDown-Green.png" alt="arrow down"></a></div>
+
+
+
+
+
+<!-- Mobile -->
+<div class="featured__anchor__links mobile"><a href="#featured-candy-anchor-mobile" class="candy"><img src="https://moscadesign.com/wp-content/uploads/2026/04/IceCreamConeIcon-Wht.png" alt="Candy">Candy<img src="https://moscadesign.com/wp-content/uploads/2026/04/IconLongArrowDown-Pink.png" alt="arrow down"></a><a href="#featured-nautical-anchor-mobile" class="nautical"><img src="https://moscadesign.com/wp-content/uploads/2026/04/NauticalFishIcon-Wht.png" alt="Nautical">Nautical<img src="https://moscadesign.com/wp-content/uploads/2026/04/IconLongArrowDown-Green.png" alt="arrow down"></a></div>
+
+
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Script loaded');
+  
+  const anchors = document.querySelectorAll('a[href="#featured-candy-anchor-desktop"], a[href="#featured-nautical-anchor-desktop"], a[href="#featured-candy-anchor-mobile"], a[href="#featured-nautical-anchor-mobile"]');
+  console.log('Found anchors:', anchors.length);
+  
+  anchors.forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      console.log('Click detected on:', this.getAttribute('href'));
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      
+      const target = document.querySelector(this.getAttribute('href'));
+      console.log('Target element:', target);
+      if (target) {
+        // Different offset for desktop vs mobile anchors
+        const href = this.getAttribute('href');
+        const offset = href.includes('-desktop') ? 40 : 70;
+        
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        console.log('Scrolling to position:', targetPosition, 'with offset:', offset);
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+      return false;
+    });
+  });
+});
+</script>
+

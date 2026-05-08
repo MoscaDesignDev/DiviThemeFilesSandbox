@@ -590,4 +590,161 @@ p {
     }
   }
 
+// Product Thumbnails
+.woocommerce {
+  ul {
+    &.products {
+      li {
+        &.product {
+          a {
+            &:hover {
+              .et_shop_image {
+                box-shadow: 0px 0px 27px 2px rgba(0, 0, 0, 0.6);
+                border: 1px solid rgb(102 102 102 / 18%);
+                transition: all .2s;
+                .et_overlay {
+                  border: none;
+                }
+              }
+            }
+            .et_shop_image {
+              border-radius: 4px;
+              overflow: hidden;
+              transition: all .2s;
+              img {
+                &.attachment-woocommerce_thumbnail {
+                  margin: 0 !important;
+                }
+              }
+              .et_overlay {
+                border: none;
+                &::before {
+                  color: #b7b7b7;
+                }
+              }
+            }
+            .woocommerce-loop-product__title {
+              line-height: 22px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+// 2026 Featured Products Buttons and H2 styles
+.featured__anchor__links {
+  display: flex;
+  flex-direction: row;
+  gap: 0 15px;
+  margin-top: 20px;
+  justify-content: center;
+  &.mobile {
+    margin-top: 10px;
+    a {
+      border-radius: 25px;
+      font-size: 15px;
+      padding: 10px 20px;
+    }
+  }
+  a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px 25px;
+    text-transform: uppercase;
+    transition: .3s;
+    &.candy {
+      background-color: rgb(217 126 180 / 39%);
+      border: 1px solid #d97eb4;
+      color: #902364;
+    }
+    &.nautical {
+      background-color: rgb(16 172 85 / 39%);
+      border: 1px solid #10ac55;
+      color: #09592d;
+    }
+    img {
+      &:first-of-type {
+        height: 30px;
+        display: none;
+      }
+      &:last-of-type {
+        height: 15px;
+        padding-left: 5px;
+      }
+    }
+    &:hover {
+      &.candy {
+        background-color: rgb(217 126 180 / 26%);
+        color: #902364;
+      }
+      &.nautical {
+        background-color: rgb(16 172 85 / 26%);
+        color: #09592d;
+      }
+      transition: .3s;
+    }
+  }
+}
+
+#featured-candy-anchor-desktop,
+#featured-nautical-anchor-desktop {
+  h2 {
+    &.featured__title {
+      font-size: 30px;
+      font-weight: bold;
+      padding: 0 0 15px 0;
+      line-height: 50px;
+      display: flex;
+      img {
+        height: 55px;
+        padding: 0 12px 0 0;
+      }
+    }
+  }
+}
+
+#featured-candy-anchor-mobile,
+#featured-nautical-anchor-mobile {
+  h2 {
+    &.featured__title {
+      font-size: 25px;
+      font-weight: bold;
+      padding: 0 0 10px 0;
+      line-height: 30px;
+      display: flex;
+      img {
+        height: 30px;
+        padding: 0 10px 0 0;
+      }
+    }
+  }
+}
+
+#featured-candy-anchor-desktop,
+#featured-candy-anchor-mobile {
+  h2 {
+    color: #902364;
+  }
+}
+
+#featured-nautical-anchor-desktop,
+#featured-nautical-anchor-mobile {
+  h2 {
+    color: #09592d;
+  }
+}
+
+
+
+
+
+
 
