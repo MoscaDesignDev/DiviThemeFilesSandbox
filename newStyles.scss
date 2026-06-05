@@ -744,7 +744,29 @@ p {
 
 
 
+.sf__forms {
+ label {
 
+ }
+ input {
+  &[type="text"] {
+
+  }
+ } 
+ textarea {
+
+ }
+ .sf__forms__checkbox {
+  input {
+    &[type="checkbox"] {
+
+    }
+  }
+  label {
+    
+  }
+ }
+}
 
 
 
