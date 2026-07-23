@@ -293,6 +293,9 @@ p.woocommerce-store-notice.demo_store strong {
   font-size: 20px;
 }
 
+.legal__links {
+  margin-bottom: 0 !important;
+}
 .legal__links ul {
   padding-left: 0;
 }
@@ -616,6 +619,49 @@ p.woocommerce-store-notice.demo_store strong {
 #featured-nautical-anchor-desktop h2,
 #featured-nautical-anchor-mobile h2 {
   color: #09592d;
+}
+
+.mosca__team__photo img {
+  max-width: 90%;
+  height: auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
+@media (max-width: 980px) {
+  .mosca__team__photo img {
+    max-width: 100%;
+  }
+}
+
+.ctct-form-description {
+  font-family: "Montserrat", Helvetica, Arial, Lucida, sans-serif;
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1em;
+  padding-bottom: 8px;
+  display: block;
+}
+
+.cc__signup__footer .ctct-form-field-email {
+  margin: 0;
+}
+.cc__signup__footer .ctct-form-field-email input[type=email] {
+  padding: 3px 12px;
+}
+
+.ctct-disclosure hr {
+  display: none;
+}
+.ctct-disclosure small {
+  padding-top: 4px;
+  display: block;
+  font-size: 11px;
+  line-height: 16px;
+  color: rgb(187, 187, 187);
+}
+
+.footer__test {
+  padding: 35px 0 20px 0;
 }
 
 /*# sourceMappingURL=newStyles.css.map */

@@ -1,0 +1,49 @@
+<h2 style="color:#fff;">Stay In Touch</h2>
+<br>
+<hr>
+<!--  ----------------------------------------------------------------------  -->
+<!--  NOTE: Please add the following <META> element to your page <HEAD>.      -->
+<!--  If necessary, please modify the charset parameter to specify the        -->
+<!--  character set of your HTML page.                                        -->
+<!--  ----------------------------------------------------------------------  -->
+
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script>
+    function enableBtn(){
+        document.getElementById("submit_details").disabled = false;
+    }
+</script>
+
+
+<!--  ----------------------------------------------------------------------  -->
+<!--  NOTE: Please add the following <FORM> element to your page.             -->
+<!--  ----------------------------------------------------------------------  -->
+
+<form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D5f0000093k01" method="POST">
+
+<input type=hidden name="oid" value="00D5f0000093k01">
+<input type=hidden name="retURL" value="https://moscadesign.com/thank-you/">
+<input id="lead_source" name="lead_source" type="hidden" value="MD Home Page Bottom Right" />
+
+<!--  ----------------------------------------------------------------------  -->
+<!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+<!--  these lines if you wish to test in debug mode.                          -->
+<!--  <input type="hidden" name="debug" value=1>                              -->
+<!--  <input type="hidden" name="debugEmail"                                  -->
+<!--  value="tsharma@cloudqnect.com">                                         -->
+<!--  ----------------------------------------------------------------------  -->
+  
+<div id="responsive-form" class="clearfix">
+
+<div class="form-row"> 
+<div class="column-full"><label for="email"><p style="color:white;">Email:</p></label><input  id="email" maxlength="80" name="email" size="20" type="text" Required />
+</div>
+
+</div>
+</div>
+<div class="g-recaptcha" data-sitekey="6LciVZQqAAAAAHm6cqJ68NLmsSnQk-dAZQZALjtW" data-callback="enableBtn"></div>
+<button type="submit" id="submit_details" style="margin-left: 6px" disabled>Send</button>
+
+</form>
