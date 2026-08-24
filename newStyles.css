@@ -14,31 +14,61 @@
 }
 
 p.woocommerce-store-notice.demo_store {
-  background-color: #0f7582 !important;
+  display: flex;
+  flex-direction: column;
+  background-color: #000000 !important;
+  border-bottom: 1px solid #303030;
   padding: 15px 0 !important;
+  position: sticky !important;
+  top: 0 !important;
+  order: -1 !important;
 }
 p.woocommerce-store-notice.demo_store strong {
-  color: #fff !important;
+  color: #df9f12 !important;
+  font-size: 18px;
+}
+p.woocommerce-store-notice.demo_store .woocommerce-store-notice__dismiss-link {
+  display: none;
+}
+p.woocommerce-store-notice.demo_store small {
+  color: #aa790e;
+  font-size: 10px;
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-weight: 400;
+  text-transform: uppercase;
 }
 
+.et_pb_section_1_tb_header.et_pb_section {
+  height: 270px;
+}
 .et_pb_section_1_tb_header.et_pb_section::before, .et_pb_section_1_tb_header.et_pb_section::after {
   position: absolute;
   content: "";
 }
 .et_pb_section_1_tb_header.et_pb_section::before {
-  width: 100%;
+  width: 450px;
   height: 100%;
-  background: transparent url("https://moscadesign.com/wp-content/uploads/2026/03/HeaderSpring26-GrassBG.png") repeat-x 50% 100%;
-  background-size: 600px auto;
+  background: transparent url(https://dev-moscadesign.mystagingwebsite.com/wp-content/uploads/2026/08/HeaderBlockGoldGift3D.png) no-repeat 100% 100%;
+  background-size: auto 100%;
   z-index: 1;
+  left: calc(50% - 650px);
+}
+@media (max-width: 1534px) {
+  .et_pb_section_1_tb_header.et_pb_section::before {
+    left: 110px;
+  }
 }
 .et_pb_section_1_tb_header.et_pb_section::after {
-  width: 200px;
+  width: 100%;
   height: 100%;
+  background: transparent url(https://dev-moscadesign.mystagingwebsite.com/wp-content/uploads/2026/08/HeaderBlockSnowflakesStreetYellow.png) no-repeat 100% 100%;
+  background-size: auto 100%;
+  z-index: 1;
   right: 0;
-  bottom: 0;
-  background: transparent url("https://moscadesign.com/wp-content/uploads/2026/03/HeaderSpring26BlockFlowers.png") no-repeat 100% 50%;
-  background-size: auto 60%;
+  top: 0;
 }
 .et_pb_section_1_tb_header.et_pb_section .et_pb_row_1_tb_header,
 .et_pb_section_1_tb_header.et_pb_section .et_pb_row_2_tb_header,
@@ -50,13 +80,13 @@ p.woocommerce-store-notice.demo_store strong {
   margin-bottom: 0 !important;
 }
 .et_pb_section_1_tb_header.et_pb_section .et_pb_column_4_tb_header .et_pb_text_0_tb_header h2 {
-  color: #132333;
+  color: #FFF;
   font-size: 28px;
   line-height: 28px;
   font-weight: 700;
   text-align: right;
-  text-shadow: 0px 0px 25px rgb(255, 255, 255);
   padding-right: 2em;
+  text-shadow: 0 0 9px #000;
 }
 @media (max-width: 1200px) {
   .et_pb_section_1_tb_header.et_pb_section .et_pb_social_media_follow li a {
@@ -75,23 +105,27 @@ p.woocommerce-store-notice.demo_store strong {
   clear: both;
   position: absolute;
   right: 0;
-  top: 107px;
+  top: 132px;
 }
 @media (max-width: 1400px) {
   .et_pb_section_1_tb_header.et_pb_section #mega-menu-wrap-primary-menu {
-    margin-left: -160px;
+    margin-left: -240px;
   }
 }
 .et_pb_section_1_tb_header.et_pb_section #mega-menu-wrap-primary-menu #mega-menu-primary-menu {
-  background-color: rgba(127, 188, 18, 0.77);
   border-radius: 4px 4px 0 0;
 }
 .et_pb_section_1_tb_header.et_pb_section #mega-menu-wrap-primary-menu #mega-menu-primary-menu .mega-menu-item .mega-menu-link {
   height: 43px;
   font-weight: 600;
   font-size: 16px;
-  color: #ffffff;
+  color: #df9f12;
   text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.34);
+}
+@media (max-width: 1150px) {
+  .et_pb_section_1_tb_header.et_pb_section #mega-menu-wrap-primary-menu #mega-menu-primary-menu .mega-menu-item .mega-menu-link {
+    font-size: 14px;
+  }
 }
 .et_pb_section_1_tb_header.et_pb_section #mega-menu-wrap-primary-menu #mega-menu-primary-menu .mega-menu-item .mega-sub-menu {
   background: linear-gradient(to bottom, #d9f6a7 0%, #edfad7 100%);
@@ -193,10 +227,10 @@ p.woocommerce-store-notice.demo_store strong {
   padding-right: 0 !important;
 }
 .et_pb_section_1_tb_header.et_pb_section .et_pb_row--with-menu .et_pb_column .et_pb_menu__wrap .et-menu-nav .et-menu.nav li a {
-  color: #132333 !important;
+  color: #FFF !important;
 }
 .et_pb_section_1_tb_header.et_pb_section .et_pb_row--with-menu .et_pb_column .et_pb_menu__wrap .et_pb_menu__icon.et_pb_menu__cart-button {
-  color: #132333 !important;
+  color: #FFF !important;
 }
 .et_pb_section_1_tb_header.et_pb_section .et_pb_row--with-menu .et_pb_column .aws-container {
   border-radius: 2em;
@@ -213,6 +247,40 @@ p.woocommerce-store-notice.demo_store strong {
   border: none !important;
 }
 
+@media (max-width: 980px) {
+  .header__logo__mobile a .et_pb_image_wrap img {
+    height: 140px;
+    margin: 20px 0 0 0;
+  }
+  .et_pb_section_1_tb_header.et_pb_section::before {
+    width: 60%;
+    height: 90%;
+    z-index: 1;
+    left: -20%;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+  .et_pb_section_1_tb_header.et_pb_section::after {
+    width: 100%;
+    height: 80%;
+    z-index: 1;
+    right: 0;
+    top: 55%;
+    transform: translate(0, -50%);
+  }
+}
+@media (max-width: 768px) {
+  .et_pb_section_1_tb_header.et_pb_section::before {
+    width: 50%;
+    height: 80%;
+    background: transparent url(https://dev-moscadesign.mystagingwebsite.com/wp-content/uploads/2026/08/HeaderBlockGoldGift3D.png) no-repeat 100% 100%;
+    background-size: auto 100%;
+    z-index: 2;
+    left: -11%;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+}
 .text__arrow__btn {
   margin-bottom: 10px !important;
 }
@@ -307,11 +375,27 @@ p.woocommerce-store-notice.demo_store strong {
 }
 
 .store__notice {
+  position: relative;
   text-align: center;
-  color: #132333;
   font-size: 18px;
   line-height: 23px;
   font-weight: 700;
+}
+.store__notice strong {
+  color: #df9f12 !important;
+  font-size: 18px;
+  line-height: 20px;
+}
+.store__notice small {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  color: #aa790e;
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
 }
 
 @media (max-width: 980px) {
@@ -340,7 +424,7 @@ p.woocommerce-store-notice.demo_store strong {
   }
 }
 .main-nav-desktop.scrolled-bar .mega-toggle-blocks-right .mega-toggle-block button.mega-toggle-animated {
-  background: #335572 !important;
+  background: #df9f12 !important;
   transition: 0.5s;
 }
 .main-nav-desktop .mega-toggle-blocks-right {
@@ -355,7 +439,7 @@ p.woocommerce-store-notice.demo_store strong {
   left: 0;
   right: 0;
   height: 0;
-  background-color: #132134;
+  background-color: #000;
   box-shadow: 0px 0px 62px -1px rgba(0, 0, 0, 0.29);
   transition: 0.4s;
 }
@@ -374,7 +458,7 @@ p.woocommerce-store-notice.demo_store strong {
 .main-nav-desktop .mega-toggle-blocks-right .mega-toggle-block button.mega-toggle-animated {
   float: none !important;
   border-radius: 4px !important;
-  background: #103859 !important;
+  background: #df9f12 !important;
   color: #fff !important;
   border: none !important;
   padding: 10px 10px !important;
@@ -387,7 +471,10 @@ p.woocommerce-store-notice.demo_store strong {
 }
 .main-nav-desktop .mega-toggle-blocks-right .mega-toggle-block button.mega-toggle-animated .mega-toggle-animated-box .mega-toggle-animated-inner {
   width: 30px;
-  background-color: rgba(255, 255, 255, 0.72) !important;
+  background-color: #000 !important;
+}
+.main-nav-desktop .mega-toggle-blocks-right .mega-toggle-block button.mega-toggle-animated .mega-toggle-animated-box .mega-toggle-animated-inner::before, .main-nav-desktop .mega-toggle-blocks-right .mega-toggle-block button.mega-toggle-animated .mega-toggle-animated-box .mega-toggle-animated-inner::after {
+  background-color: #000 !important;
 }
 @media (max-width: 480px) {
   .main-nav-desktop .mega-toggle-blocks-right {
@@ -418,8 +505,8 @@ p.woocommerce-store-notice.demo_store strong {
 }
 
 @media (max-width: 980px) {
-  .search__bar__mobile {
-    background-color: #132134 !important;
+  .search__bar__mobile.et_pb_section_0.et_pb_section {
+    background-color: #000 !important;
     height: 120px;
   }
   .search__bar__mobile .et_pb_fullwidth_header_container.left .aws-container {
@@ -437,12 +524,12 @@ p.woocommerce-store-notice.demo_store strong {
     border: none !important;
   }
 }
-@media (max-width: 980px) and (min-width: 768px) {
+@media (max-width: 980px) and (min-width: 767px) {
   .search__bar__mobile .et_pb_fullwidth_header_container.left .aws-container {
     margin-top: 1em;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 766px) {
   .search__bar__mobile .et_pb_fullwidth_header_container.left {
     width: 98% !important;
   }
@@ -465,6 +552,13 @@ p.woocommerce-store-notice.demo_store strong {
   }
 }
 
+@media (max-width: 768px) {
+  .et_pb_row_0_tb_header,
+  .et_pb_row_1_tb_header,
+  .et_pb_text_1_tb_header {
+    display: none !important;
+  }
+}
 /* ── Hero video banner: responsive scaling on tablet & mobile ── */
 @media (max-width: 980px) {
   /* 1. Kill the fixed min-height Divi bakes in */

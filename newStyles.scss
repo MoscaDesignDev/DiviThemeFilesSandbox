@@ -13,63 +13,67 @@
   }
 }
 
-// Implement the below when we want to add audio to the banner video
-// .et_pb_slide_content {
-//     button {
-//         &#unmute-video {
-//             background: transparent !important;
-//             border: 1px solid #FFF !important;
-//             border-radius: 50% !important;
-//             padding: 12px 10px !important;
-//             i {
-//                 color: #FFF;
-//                 display: flex;
-//                 &.fa-volume-xmark {
-//                     display: flex;
-//                 }
-//                 &.fa-volume-high {
-//                     display: none;
-//                 }
-//             }
-//         }
-//     }
-// }
-
-// Header Snow
 
 p {
   &.woocommerce-store-notice {
     &.demo_store {
-      background-color: #0f7582 !important;
+      display: flex;
+      flex-direction: column;
+      background-color: #000000 !important;
+      border-bottom: 1px solid #303030;
       padding: 15px 0 !important;
+      position: sticky !important;
+      top: 0 !important;
+      order: -1 !important;
       strong {
-        color: #fff !important;
+        color: #df9f12 !important;
+        font-size: 18px;
+      }
+      .woocommerce-store-notice__dismiss-link {
+        display: none;
+      }
+      small {
+        color: #aa790e;
+        font-size: 10px;
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        font-weight: 400;
+        text-transform: uppercase;
       }
     }
   }
 }
 
+// Header Styles
 .et_pb_section_1_tb_header {
   &.et_pb_section {
+    height: 270px;
     &::before,
     &::after {
       position: absolute;
       content: "";
     }
     &::before {
-      width: 100%;
+      width: 450px;
       height: 100%;
-      background: transparent url('https://moscadesign.com/wp-content/uploads/2026/03/HeaderSpring26-GrassBG.png') repeat-x 50% 100%;
-      background-size: 600px auto;
+      background: transparent url(https://dev-moscadesign.mystagingwebsite.com/wp-content/uploads/2026/08/HeaderBlockGoldGift3D.png) no-repeat 100% 100%;
+      background-size: auto 100%;
       z-index: 1;
+      left: calc(50% - 650px);
+      @media (max-width: 1534px) {
+        left: 110px;
+      } 
     }
     &::after {
-      width: 200px;
+      width: 100%;
       height: 100%;
+      background: transparent url(https://dev-moscadesign.mystagingwebsite.com/wp-content/uploads/2026/08/HeaderBlockSnowflakesStreetYellow.png) no-repeat 100% 100%;
+      background-size: auto 100%;
+      z-index: 1;
       right: 0;
-      bottom: 0;
-      background: transparent url('https://moscadesign.com/wp-content/uploads/2026/03/HeaderSpring26BlockFlowers.png') no-repeat 100% 50%;
-      background-size: auto 60%;
+      top: 0;
     }
     .et_pb_row_1_tb_header,
     .et_pb_row_2_tb_header,
@@ -81,13 +85,13 @@ p {
       .et_pb_text_0_tb_header {
         margin-bottom: 0 !important;
         h2 {
-          color: #132333;
+          color: #FFF;
           font-size: 28px;
           line-height: 28px;
           font-weight: 700;
           text-align: right;
-          text-shadow: 0px 0px 25px rgba(255, 255, 255, 1);
           padding-right: 2em;
+          text-shadow: 0 0 9px #000;
         }
       }
     }
@@ -114,20 +118,23 @@ p {
       clear: both;
       position: absolute;
       right: 0;
-      top: 107px;
+      top: 132px;
       @media (max-width: 1400px) {
-        margin-left: -160px;
+        margin-left: -240px;
       }
       #mega-menu-primary-menu {
-        background-color: rgb(127 188 18 / 77%);
+        // background-color: rgba(255, 255, 255, 0.226);
         border-radius: 4px 4px 0 0;
         .mega-menu-item {
           .mega-menu-link {
             height: 43px;
             font-weight: 600;
             font-size: 16px;
-            color: #ffffff;
+            color: #df9f12;
             text-shadow: 1px 1px 6px rgb(0 0 0 / 34%);
+            @media (max-width: 1150px) {
+              font-size: 14px;
+            }
           }
           .mega-sub-menu {
             background: linear-gradient(to bottom, #d9f6a7 0%, #edfad7 100%);
@@ -234,14 +241,14 @@ p {
                   padding-right: 0 !important;
                 }
                 a {
-                  color: #132333 !important;
+                  color: #FFF !important;
                 }
               }
             }
           }
           .et_pb_menu__icon {
             &.et_pb_menu__cart-button {
-              color: #132333 !important;
+              color: #FFF !important;
             }
           }
         }
@@ -267,6 +274,57 @@ p {
     }
   }
 }
+
+@media (max-width: 980px) {
+  .header__logo__mobile {
+    a {
+      .et_pb_image_wrap {
+        img {
+          height: 140px;
+          margin: 20px 0 0 0;
+        }
+      }
+    }
+  }
+  .et_pb_section_1_tb_header {
+    &.et_pb_section {
+      &::before {
+        width: 60%;
+        height: 90%;
+        z-index: 1;
+        left: -20%;
+        top: 50%;
+        transform: translate(0, -50%);
+      }
+      &::after {
+        width: 100%;
+        height: 80%;
+        z-index: 1;
+        right: 0;
+        top: 55%;
+        transform: translate(0, -50%);
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .et_pb_section_1_tb_header {
+    &.et_pb_section {
+      &::before {
+        width: 50%;
+        height: 80%;
+        background: transparent url(https://dev-moscadesign.mystagingwebsite.com/wp-content/uploads/2026/08/HeaderBlockGoldGift3D.png) no-repeat 100% 100%;
+        background-size: auto 100%;
+        z-index: 2;
+        left: -11%;
+        top: 50%;
+        transform: translate(0, -50%);
+      }
+    }
+  }
+}
+
 
 
 // Rollover Buttons - Using on Ornaments LP now, but will be a global
@@ -374,11 +432,27 @@ p {
 
 // Tablet/Mobile Header Styles
 .store__notice {
+  position: relative;
   text-align: center;
-  color: #132333;
   font-size: 18px;
   line-height: 23px;
   font-weight: 700;
+  strong {
+    color: #df9f12 !important;
+    font-size: 18px;
+    line-height: 20px;
+  }
+  small {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    color: #aa790e;
+    font-size: 10px;
+    line-height: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
 }
 .main-nav-desktop {
   @media (max-width: 980px) {
@@ -405,7 +479,7 @@ p {
       .mega-toggle-block {
         button {
           &.mega-toggle-animated {
-            background: #335572 !important;
+            background: #df9f12 !important;
             transition: .5s;
           }
         }
@@ -423,7 +497,7 @@ p {
         left: 0;
         right: 0;
         height: 0;
-        background-color: #132134;
+        background-color: #000;
         box-shadow: 0px 0px 62px -1px rgba(0, 0, 0, 0.29);
         transition: .4s;
       }
@@ -444,7 +518,7 @@ p {
         &.mega-toggle-animated {
           float: none !important;
           border-radius: 4px !important;
-          background: #103859 !important;
+          background: #df9f12 !important;
           color: #fff !important;
           border: none !important;
           padding: 10px 10px !important;
@@ -454,8 +528,12 @@ p {
             .mega-toggle-animated-box {
               width: 30px;
               .mega-toggle-animated-inner {
-              width: 30px;
-              background-color: rgb(255 255 255 / 72%) !important;
+                width: 30px;
+                background-color: #000 !important;
+                &::before,
+                &::after {
+                  background-color: #000 !important;
+                }
             }
           }
 
@@ -495,8 +573,12 @@ p {
 // Search Bar
 .search__bar__mobile {
   @media (max-width: 980px) {
-    background-color: #132134 !important;
-    height: 120px;
+    &.et_pb_section_0 {
+      &.et_pb_section {
+        background-color: #000 !important;
+        height: 120px;
+      }
+    }
     .et_pb_fullwidth_header_container {
       &.left {
         .aws-container {
@@ -520,7 +602,7 @@ p {
       }
     }
   }
-  @media (max-width: 980px) and (min-width: 768px) {
+  @media (max-width: 980px) and (min-width: 767px) {
     .et_pb_fullwidth_header_container {
       &.left {
         .aws-container {
@@ -529,7 +611,7 @@ p {
       }
     }
   }
-  @media (max-width: 767px) {
+  @media (max-width: 766px) {
     .et_pb_fullwidth_header_container {
       &.left {
         width: 98% !important;
@@ -547,6 +629,15 @@ p {
   }
   @media (max-width: 980px) {
     top: 322px !important;
+  }
+}
+
+// Fix for responsive breakpoint in Divi Theme
+@media (max-width: 768px) {
+  .et_pb_row_0_tb_header, 
+  .et_pb_row_1_tb_header, 
+  .et_pb_text_1_tb_header {
+      display: none !important;
   }
 }
 
