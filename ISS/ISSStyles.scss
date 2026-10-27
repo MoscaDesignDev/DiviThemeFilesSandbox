@@ -1,0 +1,105 @@
+
+.iss-title {
+  h1 {
+    color: #222;
+    font-size: 34px;
+    font-weight: bold;
+    text-align: center;
+  }
+  h4 {
+    font-size: 18px;
+    color: #222;
+    text-align: center;
+  }
+  @media (max-width: 980px) {
+    h1 {
+      font-size: 30px;
+    }
+    h4 {
+      font-size: 16px;
+    }
+  }
+}
+.iss-nav {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0 3em;
+  margin-bottom: 50px;
+  .iss-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px 45px 15px 25px;
+    background-image: url('https://moscadesign.com/wp-content/uploads/2026/10/circle-down-regular.png');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: auto 40%;
+    background-color: #222222;
+    color: #df9f12;
+    text-transform: uppercase;
+    transition: .3s;
+    &:hover {
+      background-color: #4c4c4c;
+      color: #df9f12;
+      transition: .3s;
+    }
+  }
+  @media (max-width: 980px) {
+    margin-bottom: 25px;
+    gap: 0 1.5em;
+    .iss-btn {
+      border-radius: 20px;
+      font-size: 15px;
+      font-weight: bold;
+      padding: 10px 35px 10px 15px;
+    }
+  }
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    gap: 20px 1.5em;
+    .iss-btn {
+      width: 45%;
+      font-size: 13px;
+    }
+  }
+}
+
+.iss-section {
+  padding-top: 70px;
+  margin-top: -70px;
+  margin-bottom: 40px;
+  padding-bottom: 25px;
+  &:not(:last-of-type) {
+    border-bottom: 1px solid #a6a6a6;
+  }
+  h2 {
+    font-size: 26px;
+    font-weight: bold;
+  }
+  @media (max-width: 768px) {
+    ul {
+      &.products {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px;
+        &::before,
+        &::after {
+          display: none;
+        }
+        li {
+          &.product {
+            width: auto !important;
+            margin: 0 !important;
+            float: none !important;
+          }
+        }
+      }
+    }
+  }
+}
