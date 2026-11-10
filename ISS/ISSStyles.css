@@ -23,52 +23,83 @@
   width: 100%;
   flex-direction: row;
   justify-content: center;
-  gap: 0 3em;
   margin-bottom: 50px;
+  border-bottom: 1px solid #bfbfbf;
 }
 .iss-nav .iss-btn {
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
-  border-radius: 30px;
-  font-size: 18px;
+  justify-content: center;
+  font-size: 16px;
   font-weight: bold;
-  padding: 15px 45px 15px 25px;
-  background-image: url("https://moscadesign.com/wp-content/uploads/2026/10/circle-down-regular.png");
+  padding: 15px 36px 15px 15px;
+  background-image: url("https://moscadesign.com/wp-content/uploads/2026/11/circle-down-regular-black.png");
   background-repeat: no-repeat;
-  background-position: right 15px center;
-  background-size: auto 40%;
-  background-color: #222222;
-  color: #df9f12;
+  background-position: right 13px center;
+  background-size: auto 17px;
+  background-color: transparent;
+  color: #000;
   text-transform: uppercase;
+  text-align: center;
+  overflow: hidden;
   transition: 0.3s;
 }
+.iss-nav .iss-btn::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 4px;
+  background-color: #df9f12;
+  transition: 0.3s;
+}
+.iss-nav .iss-btn:not(:last-of-type) {
+  border-right: 1px solid #bfbfbf;
+}
 .iss-nav .iss-btn:hover {
-  background-color: #4c4c4c;
   color: #df9f12;
+  background-image: url("https://moscadesign.com/wp-content/uploads/2026/10/circle-down-regular.png");
+  transition: 0.3s;
+}
+.iss-nav .iss-btn:hover::after {
+  bottom: 0px;
   transition: 0.3s;
 }
 @media (max-width: 980px) {
   .iss-nav {
     margin-bottom: 25px;
-    gap: 0 1.5em;
   }
   .iss-nav .iss-btn {
-    border-radius: 20px;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
     padding: 10px 35px 10px 15px;
+    background-position: right 7px center;
+    background-size: auto 16px;
   }
 }
 @media (max-width: 768px) {
   .iss-nav {
     flex-wrap: wrap;
-    gap: 20px 1.5em;
   }
   .iss-nav .iss-btn {
-    width: 45%;
+    width: 50%;
     font-size: 13px;
+  }
+  .iss-nav .iss-btn:last-of-type {
+    border-right: 1px solid #bfbfbf;
+  }
+  .iss-nav .iss-btn:nth-of-type(-n+2) {
+    border-top: 1px solid #bfbfbf;
+  }
+  .iss-nav .iss-btn:nth-of-type(odd):nth-of-type(-n+5) {
+    border-left: 1px solid #bfbfbf;
+  }
+  .iss-nav .iss-btn:not(:nth-of-type(5)):not(:nth-of-type(6)) {
+    border-bottom: 1px solid #bfbfbf;
   }
 }
 
@@ -79,7 +110,7 @@
   padding-bottom: 25px;
 }
 .iss-section:not(:last-of-type) {
-  border-bottom: 1px solid #a6a6a6;
+  border-bottom: 1px solid #bfbfbf;
 }
 .iss-section h2 {
   font-size: 26px;
