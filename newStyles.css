@@ -129,7 +129,7 @@ p.woocommerce-store-notice.demo_store small {
 }
 .et_pb_section_1_tb_header.et_pb_section #mega-menu-wrap-primary-menu #mega-menu-primary-menu .mega-menu-item .mega-sub-menu {
   background: linear-gradient(to bottom, #ffdb4b 0%, #f9f9f9 100%);
-  border-radius: 0 0 4px 4px;
+  border-radius: 4px;
   border: 1px solid #e1e1e1;
   border-top: none;
   box-shadow: 0px 0px 32px -5px rgba(0, 0, 0, 0.48);
@@ -197,6 +197,13 @@ p.woocommerce-store-notice.demo_store small {
   background-color: #fff;
   color: #000 !important;
   transition: all 0.3s ease;
+}
+.et_pb_section_1_tb_header.et_pb_section #mega-menu-wrap-primary-menu #mega-menu-primary-menu .mega-menu-item:nth-last-child(-n+3) .mega-sub-menu {
+  right: 0;
+  min-width: 200px;
+}
+.et_pb_section_1_tb_header.et_pb_section #mega-menu-wrap-primary-menu #mega-menu-primary-menu .mega-menu-item:nth-last-child(-n+3) .mega-sub-menu .mega-menu-item a.mega-menu-link {
+  text-align: left;
 }
 .et_pb_section_1_tb_header.et_pb_section .et_pb_row--with-menu {
   position: relative;

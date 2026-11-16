@@ -138,7 +138,7 @@ p {
           }
           .mega-sub-menu {
             background: linear-gradient(to bottom, #ffdb4b 0%, #f9f9f9 100%);
-            border-radius: 0 0 4px 4px;
+            border-radius: 4px;
             border: 1px solid #e1e1e1;
             border-top: none;
             box-shadow: 0px 0px 32px -5px rgb(0 0 0 / 48%);
@@ -212,6 +212,19 @@ p {
                     background-color: #fff;
                     color: #000 !important;
                     transition: all 0.3s ease;
+                  }
+                }
+              }
+            }
+          }
+          &:nth-last-child(-n+3) {
+            .mega-sub-menu {
+              right: 0;
+              min-width: 200px;
+              .mega-menu-item {
+                a {
+                  &.mega-menu-link {
+                    text-align: left;
                   }
                 }
               }
